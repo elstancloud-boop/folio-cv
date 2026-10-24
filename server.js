@@ -13,7 +13,7 @@ const LOCAL = /\/\/(localhost|127\.0\.0\.1|\[::1\])/.test(BASE);
 const ENABLED = !!KEY || LOCAL;
 const ROOT = __dirname;
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.json': 'application/json', '.woff2': 'font/woff2' };
-const STATIC_OK = new Set(['index.html', 'styles.css', 'app.js', 'ai.js', 'linkedin.js', 'sw.js', 'manifest.webmanifest']);
+const STATIC_OK = new Set(['index.html', 'styles.css', 'app.js', 'ai.js', 'linkedin.js', 'cover.js', 'sw.js', 'manifest.webmanifest']);
 
 /* ---------- prompts ---------- */
 const SCHEMA = `Return ONLY a JSON object with this exact shape (use "" or [] when unknown):
@@ -72,6 +72,13 @@ Return ONLY this JSON (extra keys allowed as shown):
 "tips":["4 specific profile actions for this person"]}
 ${RULES}`,
     user: 'Goal of the user (may be empty): ' + String(d.goal || '').slice(0, 300) + '\n\nRESUME:\n' + String(d.resume).slice(0, 14000)
+  }),
+  cover: d => ({
+    system: `You write a cover letter from a resume, aimed at one job. Tone: ${({ warm: 'warm, human and genuine', formal: 'formal and polished', bold: 'confident and direct' })[d.tone] || 'confident and direct'}. Length: ${d.length === 'short' ? 'about 170 words' : 'about 220 words'} in 3 or 4 short paragraphs.
+Paragraph 1: why this role${d.company ? ' at ' + String(d.company).slice(0, 80) : ''} and one standout strength. Middle paragraphs: the 2 or 3 strongest facts from the resume that match what the job advert asks for, told as short proof, not a list of duties. Last paragraph: simple call to action.
+${RULES} Use ONLY facts present in the resume. Do not state years of experience, cost savings, certification counts, tools, or any outcome that is not written in the resume, and do not paraphrase a number into a different one. If the advert asks for something the resume does not show, do not claim it. Hard limit: 230 words. Do not open with "I am writing to apply". No clichés (passionate, team player, hard-working, results-driven). Write in first person.
+Return ONLY JSON: {"greeting":"Dear ...,","paragraphs":["","",""],"closing":"Kind regards,"}`,
+    user: 'Role applying for: ' + String(d.role || '').slice(0, 120) + '\nCompany: ' + String(d.company || '').slice(0, 120) + '\nHiring manager (may be empty): ' + String(d.manager || '').slice(0, 80) + '\n\nRESUME:\n' + String(d.resume).slice(0, 12000) + '\n\nJOB ADVERT (may be empty):\n' + String(d.job || '').slice(0, 8000)
   }),
   tailor: d => ({
     system: `You compare a resume with a job description. Return ONLY JSON: {"matchScore":0-100,"present":["keywords from the job the resume already shows"],"missing":["important keywords or skills the job wants that the resume lacks (max 10)"],"summary":"a rewritten 35 to 55 word summary aimed at this job using only true facts from the resume","advice":["max 4 short specific actions"]}. ${RULES}`,

@@ -484,6 +484,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
         <button data-action="interview">✨ Answer questions to build my CV</button>
         <button data-action="import">📄 Import an old CV</button>
         <button data-action="linkedin">💼 LinkedIn Studio</button>
+        <button data-action="cover">✉️ Cover letter</button>
         <button data-action="load-sample">Load example resume</button>
         <button data-action="export-json">Save backup file (.json)</button>
         <button data-action="import-json">Open backup file…</button>
@@ -734,7 +735,7 @@ const VIEWS = {
       <hr class="dash"><div class="r-total"><span>SCORE</span><b>${r.score}<small>/100</small></b></div>
       <div class="r-foot"><span>${r.score >= 80 ? '✓ approved · ready to send' : r.score >= 55 ? '• good start · fix the “!” items' : '• needs more detail'}</span><span>${r.items.filter(i => i.s !== 'ok').length} to fix</span></div>
     </div></div>
-    <div class="card li-card"><b>💼 Optimise your LinkedIn too</b><p class="hint">Get a matching headline, About section, banner, skills and outreach messages written from this resume.</p><div class="btn-row"><button class="btn ai" data-action="linkedin">✨ Open LinkedIn Studio</button></div></div>
+    <div class="card li-card"><b>💼 Optimise your LinkedIn too</b><p class="hint">Get a matching headline, About section, banner, skills and outreach messages written from this resume.</p><div class="btn-row"><button class="btn ai" data-action="linkedin">✨ Open LinkedIn Studio</button><button class="btn ai" data-action="cover">✉️ Write a cover letter</button></div></div>
     <div class="btn-row"><button class="btn primary big" data-action="print">Download PDF</button><button class="btn" data-action="copy-text">Copy as plain text</button><button class="btn" data-action="export-json">Save backup</button></div>
     <p class="hint">In the print window choose “Save as PDF”, paper A4, margins None, and tick “Background graphics”.</p>`;
   }
@@ -1597,6 +1598,7 @@ const actions = {
       <button class="choice" data-ai="import"><b>📄 Import an old CV</b><span>Upload or paste, we modernise it.</span></button>
       <button class="choice" data-ai="ai-summary"><b>📝 Write my summary</b><span>A strong opening paragraph.</span></button>
       <button class="choice" data-ai="linkedin"><b>💼 Optimise my LinkedIn</b><span>Headline, About, banner, skills, messages.</span></button>
+      <button class="choice" data-ai="cover"><b>✉️ Write a cover letter</b><span>Matched to a job advert, from your CV.</span></button>
       <button class="choice" data-ai="tailor"><b>🎯 Tailor to a job advert</b><span>See missing keywords and fix them.</span></button></div>`);
     sh.onclick = e => { const b = e.target.closest('button[data-ai]'); if (!b) return; const a = b.dataset.ai; close(); if (a !== 'close') actions[a]({}); };
   },
@@ -1910,6 +1912,140 @@ function start() {
   sh.onclick = e => { const t = e.target.closest('button'); if (!t) return; if (t.dataset.liX) return U.close(); if (t.dataset.liGo) { goal = document.getElementById('goalIn').value.trim(); gen(); } };
 }
 AI.actions.linkedin = start;
+})();
+
+/* Cover Letter Studio: writes a letter from the CV (+ optional job advert). AI first, offline template as fallback. */
+(() => {
+const AI = window.FolioAI, F = () => window.Folio, U = AI._ui, $ = s => document.querySelector(s);
+const esc = U.esc, str = U.str;
+let form = { role: '', company: '', manager: '', tone: 'bold', length: 'standard', job: '' };
+
+const lowerFirst = t => t.charAt(0).toLowerCase() + t.slice(1);
+const clean = t => String(t || '').replace(/\u2014|\u2013/g, ',').replace(/\s+\n/g, '\n').trim();
+
+/* ── offline letter: only the user's own facts ── */
+function local(f) {
+  const s = F().state, p = s.personal, jobs = s.experience.filter(e => e.role || e.company);
+  const cur = jobs[0] || {}, role = f.role || p.title || 'the role', at = f.company ? ' at ' + f.company : '';
+  const lines = F().lines;
+  const proof = jobs.flatMap(e => lines(e.bullets).map(b => ({ b: b.replace(/[.\s]+$/, ''), e }))).slice(0, 3);
+  const jobWords = (f.job.toLowerCase().match(/[a-z][a-z+#.-]{3,}/g) || []);
+  const skills = s.skills.filter(k => !f.job || jobWords.some(w => k.toLowerCase().includes(w) || w.includes(k.toLowerCase()))).slice(0, 4);
+  const use = skills.length ? skills : s.skills.slice(0, 4);
+  const hello = f.manager ? 'Dear ' + f.manager + ',' : 'Dear Hiring Team,';
+  const co = t => String(t || '').replace(/[.\s]+$/, '');
+  const same = !p.title || role.toLowerCase() === p.title.toLowerCase();
+  const open = f.tone === 'warm' ? `I was glad to see the ${role} opening${at}, because it matches the work I enjoy most.` : f.tone === 'formal' ? `Please accept my application for the position of ${role}${at}.` : (same ? `I would like to bring my experience to the ${role} role${at}.` : `I would like to bring my ${p.title} background to the ${role} role${at}.`);
+  const p1 = open + (cur.role ? ` I ${cur.current ? 'currently work' : 'most recently worked'} as a ${cur.role}${cur.company ? ' at ' + cur.company : ''}${/\.$/.test(cur.company || '') ? '' : '.'}` : '');
+  let last = '';
+  const parts = proof.map((x, i) => { const c = str(x.e.company), lead = c && c !== last ? `At ${c}, ` : ''; last = c || last; const verb = lowerFirst(x.b); return i === 0 ? `${lead}I ${verb}` : (lead ? `${lead}I ${verb}` : `I ${verb}`); });
+  const p2 = parts.length ? parts.join('. ') + '.' : '';
+  const p3 = use.length ? `I would add strengths in ${use.slice(0, -1).join(', ')}${use.length > 1 ? ' and ' : ''}${use.slice(-1)}, and I learn quickly on the job.` : '';
+  const p4 = 'I would welcome a short conversation about how I can help your team. Thank you for your time and consideration.';
+  return { greeting: hello, paragraphs: [p1, p2, p3, p4].filter(Boolean), closing: f.tone === 'formal' ? 'Yours sincerely,' : 'Kind regards,' };
+}
+
+
+/* flag numbers in the letter that are not on the CV (models sometimes invent them) */
+const W = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50, hundred: 100 };
+function nums(t) {
+  const out = new Set(); t = String(t).toLowerCase().replace(/(\d),(\d)/g, '$1$2');
+  (t.match(/\d+(?:\.\d+)?/g) || []).forEach(n => out.add(String(+n)));
+  (t.match(/\b(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|hundred)\b/g) || []).forEach(w => out.add(String(W[w])));
+  return out;
+}
+function unverified(letter, resume, job) {
+  const ok = nums(resume + ' ' + (job || '')), bad = [];
+  const re = /\b\d[\d,.]*\s?(?:%|percent|years?|-year|months?)?|\b(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|hundred)(?:[- ](?:year|years|month|months|percent))?\b/gi;
+  let m; while ((m = re.exec(letter))) { const n = [...nums(m[0])]; if (n.length && !n.every(x => ok.has(x)) && !/^(one|1)$/i.test(m[0].trim())) bad.push(m[0].trim()); }
+  return [...new Set(bad)].slice(0, 6);
+}
+
+function norm(d) {
+  const para = Array.isArray(d.paragraphs) ? d.paragraphs : (d.body ? String(d.body).split(/\n{2,}/) : (d.text ? String(d.text).split(/\n{2,}/) : []));
+  return { greeting: clean(d.greeting) || 'Dear Hiring Team,', paragraphs: para.map(clean).filter(Boolean), closing: clean(d.closing) || 'Kind regards,' };
+}
+function assemble(d) {
+  const p = F().state.personal;
+  return [d.greeting, ...d.paragraphs, d.closing + '\n' + (p.name || '')].join('\n\n');
+}
+
+/* ── UI ── */
+function formView() {
+  const st = F().state;
+  if (!st.personal.name && !st.experience.length) return U.open(`<p class="eyebrow">Cover letter</p><h2>Build your CV first</h2><p class="lead">The letter is written from your CV. Add your details and a job or two, then come back.</p><div class="modal-actions"><button class="btn primary big" data-cv-x="1">Okay</button></div>`).onclick = e => { if (e.target.closest('[data-cv-x]')) U.close(); };
+  const saved = st.cover || {}; form = Object.assign({}, form, saved.form || {}); if (!form.role) form.role = st.personal.title || '';
+  const sh = U.open(`<div class="iv-top"><p class="eyebrow" style="margin:0">✉️ Cover letter</p><button class="icon-btn" data-cv-x="1" aria-label="Close">✕</button></div>
+    <h2>A letter that matches the job</h2><p class="lead">Paste the job advert and we write a letter from your CV that answers it. Everything stays true to what is on your CV.</p>
+    <div class="field"><label for="cvRole">Job you are applying for</label><input id="cvRole" type="text" value="${esc(form.role)}" placeholder="e.g. Quality Assurance Officer"></div>
+    <div class="grid2"><div class="field"><label for="cvCo">Company</label><input id="cvCo" type="text" value="${esc(form.company)}" placeholder="e.g. Nigerian Breweries"></div>
+    <div class="field"><label for="cvMgr">Hiring manager (optional)</label><input id="cvMgr" type="text" value="${esc(form.manager)}" placeholder="e.g. Mr Adeyemi"></div></div>
+    <div class="field"><label for="cvJob">Job advert (recommended)</label><textarea id="cvJob" rows="6" placeholder="Paste the job description here">${esc(form.job)}</textarea></div>
+    <div class="field"><label>Style</label><div class="seg" id="cvTone" role="radiogroup">${[['bold', 'Confident'], ['warm', 'Warm'], ['formal', 'Formal']].map(([k, v]) => `<button type="button" role="radio" aria-checked="${form.tone === k}" class="${form.tone === k ? 'on' : ''}" data-tone="${k}">${v}</button>`).join('')}</div>
+    <div class="seg" id="cvLen" role="radiogroup" style="margin-top:8px">${[['short', 'Short'], ['standard', 'Standard']].map(([k, v]) => `<button type="button" role="radio" aria-checked="${form.length === k}" class="${form.length === k ? 'on' : ''}" data-len="${k}">${v}</button>`).join('')}</div></div>
+    <div class="modal-actions"><button class="btn primary big" data-cv-go="1">✨ Write my letter</button></div>`);
+  sh.onclick = e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.cvX) return U.close();
+    if (t.dataset.tone) { form.tone = t.dataset.tone; sh.querySelectorAll('[data-tone]').forEach(b => { const on = b === t; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); }); }
+    if (t.dataset.len) { form.length = t.dataset.len; sh.querySelectorAll('[data-len]').forEach(b => { const on = b === t; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); }); }
+    if (t.dataset.cvGo) { read(); gen(); }
+  };
+}
+const read = () => { form.role = str($('#cvRole').value); form.company = str($('#cvCo').value); form.manager = str($('#cvMgr').value); form.job = str($('#cvJob').value); };
+
+async function gen() {
+  const stop = U.loading(['Reading your CV…', 'Matching it to the job…', 'Writing your letter…']);
+  let d, how = 'ai';
+  try {
+    if (!U.available()) throw 0;
+    d = norm(await U.ai('cover', { resume: F().text(), job: form.job, role: form.role, company: form.company, manager: form.manager, tone: form.tone, length: form.length }));
+    if (d.paragraphs.length < 2) throw 0;
+  } catch (e) { d = norm(local(form)); how = 'offline'; }
+  stop(); const st = F().state; st.cover = { form: { ...form }, letter: assemble(d), how }; F().save(); result();
+  if (how === 'offline') F().toast('Written with the offline helper. Edit it to sound like you.');
+}
+
+function result() {
+  const st = F().state, c = st.cover;
+  const sh = U.open(`<div class="iv-top"><p class="eyebrow" style="margin:0">✉️ Your letter · ${c.how === 'ai' ? '<span class="good">written with AI</span>' : 'offline helper'}</p><button class="icon-btn" data-cv-x="1" aria-label="Close">✕</button></div>
+    <h2>Edit it until it sounds like you</h2><p class="hint">AI can get details wrong. Check every claim is true before you send.</p><div class="hint bad" id="cvWarn" hidden></div>
+    <div class="field"><textarea id="cvText" rows="14" style="line-height:1.55" aria-label="Cover letter text">${esc(c.letter)}</textarea></div>
+    <div class="modal-actions" style="flex-wrap:wrap"><button class="btn primary" data-cv="copy">Copy text</button><button class="btn" data-cv="pdf">Print / save PDF</button><button class="btn" data-cv="txt">Download .txt</button><button class="btn" data-cv="again">Change details</button><button class="btn" data-cv="redo">↻ Rewrite</button></div>`);
+  const ta = sh.querySelector('#cvText'); let tm;
+  const warn = () => { const w = unverified(ta.value, F().text(), (F().state.cover.form || {}).job), el = sh.querySelector('#cvWarn'); el.hidden = !w.length; if (w.length) el.innerHTML = '⚠️ These numbers are not on your CV: <b>' + w.map(esc).join(', ') + '</b>. Fix or remove them if they are not true.'; };
+  warn();
+  ta.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { F().state.cover.letter = ta.value; F().save(); warn(); }, 400); });
+  sh.onclick = async e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.cvX) return U.close();
+    const a = t.dataset.cv; F().state.cover.letter = ta.value; F().save();
+    if (a === 'copy') { try { await navigator.clipboard.writeText(ta.value); F().toast('Letter copied.'); } catch (er) { ta.select(); document.execCommand('copy'); F().toast('Letter copied.'); } }
+    if (a === 'txt') { const b = new Blob([ta.value], { type: 'text/plain' }), u = URL.createObjectURL(b), l = document.createElement('a'); l.href = u; l.download = (F().state.personal.name || 'cover-letter').replace(/\s+/g, '-') + '-cover-letter.txt'; l.click(); setTimeout(() => URL.revokeObjectURL(u), 2000); }
+    if (a === 'pdf') printLetter(ta.value);
+    if (a === 'again') formView();
+    if (a === 'redo') { form = Object.assign({}, form, F().state.cover.form); gen(); }
+  };
+}
+
+/* print through a hidden iframe so no popup blocker gets involved */
+function printLetter(text) {
+  const p = F().state.personal, f = F().state.cover.form || {};
+  const contact = [p.email, p.phone, p.location].filter(Boolean).join('  ·  ');
+  const date = new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+  const body = esc(text).split(/\n{2,}/).map(x => `<p>${x.replace(/\n/g, '<br>')}</p>`).join('');
+  const html = `<!doctype html><meta charset="utf-8"><title>${esc(p.name || 'Cover letter')} - cover letter</title><style>
+    @page{size:A4;margin:22mm 20mm}body{font:11.5pt/1.6 Georgia,'Times New Roman',serif;color:#222;margin:0}
+    header{border-bottom:2px solid #5266eb;padding-bottom:10px;margin-bottom:22px}h1{font:600 20pt/1.1 Helvetica,Arial,sans-serif;margin:0 0 4px;letter-spacing:-.01em}
+    .c{font:9.5pt Helvetica,Arial,sans-serif;color:#555}.d{margin:0 0 18px;color:#555;font:10pt Helvetica,Arial,sans-serif}p{margin:0 0 12px}</style>
+    <header><h1>${esc(p.name || '')}</h1><div class="c">${esc(contact)}</div></header><div class="d">${esc(date)}${f.company ? '<br>' + esc(f.company) : ''}</div>${body}`;
+  const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);
+  const d = fr.contentWindow.document; d.open(); d.write(html); d.close();
+  setTimeout(() => { fr.contentWindow.focus(); fr.contentWindow.print(); setTimeout(() => fr.remove(), 4000); }, 250);
+}
+
+AI.actions.cover = () => { const c = F().state.cover; if (c && c.letter) { form = Object.assign({}, form, c.form || {}); return result(); } formView(); };
+AI._t.localCover = local; AI._t.normCover = norm; AI._t.unverified = unverified;
 })();
 </script>
 </body>
