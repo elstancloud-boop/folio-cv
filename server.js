@@ -88,35 +88,49 @@ Return ONLY JSON: {"greeting":"Dear ...,","paragraphs":["","",""],"closing":"Kin
 
 /* ---------- LLM call ---------- */
 async function llm(p) {
-  let err;
+  let err; const t0 = Date.now(), total = +process.env.LLM_TOTAL_MS || 90000;
   for (const m of MODELS) {
-    try { return await llmOne(p, m, true); }
+    const left = total - (Date.now() - t0); if (left < 8000) break;
+    try { return await llmOne(p, m, true, left); }
     catch (e) { err = e; if (/LLM (401|403)/.test(e.message)) break; console.warn('model ' + m + ' failed, trying next:', e.message.slice(0, 120)); }
   }
-  throw err;
+  throw err || new Error('AI time budget used up');
 }
-async function llmOne({ system, user }, model, json) {
+async function llmOne({ system, user }, model, json, left) {
   const body = { model, temperature: 0.3, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] };
   if (json) body.response_format = { type: 'json_object' };
   const r = await fetch(BASE + '/chat/completions', {
-    method: 'POST', signal: AbortSignal.timeout(+process.env.LLM_TIMEOUT_MS || 90000),
+    method: 'POST', signal: AbortSignal.timeout(Math.min(+process.env.LLM_TIMEOUT_MS || 90000, left || 90000)),
     headers: { 'Content-Type': 'application/json', ...(KEY ? { Authorization: 'Bearer ' + KEY } : {}) },
     body: JSON.stringify(body)
   });
   if (!r.ok) {
-    if (json && r.status === 400) return llmOne({ system, user }, model, false); // provider without JSON mode
+    if (json && r.status === 400) return llmOne({ system, user }, model, false, left); // provider without JSON mode
     throw new Error('LLM ' + r.status + ' ' + (await r.text()).slice(0, 200));
   }
   const j = await r.json();
   return parseJson(j.choices?.[0]?.message?.content || '');
 }
 function parseJson(t) {
-  t = t.trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
-  try { return JSON.parse(t); } catch (e) {
-    const a = t.indexOf('{'), b = t.lastIndexOf('}');
-    if (a >= 0 && b > a) return JSON.parse(t.slice(a, b + 1));
-    throw new Error('Model did not return JSON');
+  t = String(t).trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+  const tries = [t];
+  /* first balanced {...} (ignores any text before or after the object) */
+  const a = t.indexOf('{');
+  if (a >= 0) {
+    let depth = 0, inStr = false, esc = false;
+    for (let k = a; k < t.length; k++) {
+      const c = t[k];
+      if (inStr) { if (esc) esc = false; else if (c === '\\') esc = true; else if (c === '"') inStr = false; continue; }
+      if (c === '"') inStr = true; else if (c === '{') depth++; else if (c === '}' && --depth === 0) { tries.push(t.slice(a, k + 1)); break; }
+    }
+    const b = t.lastIndexOf('}'); if (b > a) tries.push(t.slice(a, b + 1));
   }
+  for (const x of [...tries]) {
+    /* common slips: raw newlines/tabs inside strings, trailing commas, smart quotes as delimiters */
+    tries.push(x.replace(/[\u0000-\u001f]+/g, m => (m.includes('\n') ? '\\n' : ' ')).replace(/,\s*([}\]])/g, '$1'));
+  }
+  for (const x of tries) { try { return JSON.parse(x); } catch (e) { /* next */ } }
+  throw new Error('Model did not return valid JSON');
 }
 
 /* ---------- http ---------- */

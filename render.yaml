@@ -11,6 +11,6 @@ services:
       - key: LLM_BASE_URL
         value: https://openrouter.ai/api/v1
       - key: LLM_MODEL
-        value: google/gemma-4-31b-it:free,nvidia/nemotron-3-ultra-550b-a55b:free,poolside/laguna-s-2.1:free
+        value: nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free,poolside/laguna-s-2.1:free,poolside/laguna-xs-2.1:free
       - key: LLM_TIMEOUT_MS
-        value: "60000"
+        value: "70000"
