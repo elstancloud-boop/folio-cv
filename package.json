@@ -1,0 +1,1 @@
+{"name":"folio-resume-builder","version":"2.0.0","private":true,"description":"Resume builder with optional AI (no dependencies)","scripts":{"start":"node server.js"},"engines":{"node":">=18"}}

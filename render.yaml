@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: folio-cv
+    runtime: node
+    plan: free
+    buildCommand: echo "no build"
+    startCommand: node server.js
+    envVars:
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_BASE_URL
+        value: https://openrouter.ai/api/v1
+      - key: LLM_MODEL
+        value: google/gemma-4-31b-it:free,nvidia/nemotron-3-ultra-550b-a55b:free,poolside/laguna-s-2.1:free
+      - key: LLM_TIMEOUT_MS
+        value: "60000"
