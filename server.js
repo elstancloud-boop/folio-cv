@@ -1,4 +1,4 @@
-/* Folio server: serves the app and proxies AI requests so the API key never reaches the browser.
+/* MyVitea server: serves the app and proxies AI requests so the API key never reaches the browser.
    Zero dependencies (Node 18+). Works with any OpenAI-compatible API, including local Ollama.
    Env: LLM_API_KEY, LLM_BASE_URL (default https://api.openai.com/v1), LLM_MODEL (default gpt-4o-mini), PORT */
 'use strict';
@@ -180,4 +180,4 @@ const server = http.createServer(async (req, res) => {
     res.end(data);
   });
 });
-server.listen(PORT, () => console.log(`Folio running on http://localhost:${PORT}  (AI ${ENABLED ? 'on → ' + MODELS.join(' | ') : 'off: set LLM_API_KEY'})`));
+server.listen(PORT, () => console.log(`MyVitea running on http://localhost:${PORT}  (AI ${ENABLED ? 'on → ' + MODELS.join(' | ') : 'off: set LLM_API_KEY'})`));
