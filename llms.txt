@@ -1,0 +1,20 @@
+# MyVitea
+
+> MyVitea (https://myvitea.com) is a free AI resume builder and CV maker. It builds a full, ATS-friendly resume in under 10 minutes, tailors a LinkedIn profile to match, writes cover letters, scores a CV against a job advert and helps users practise interviews.
+
+## What it does
+- Resume / CV builder: start with just a name and a job title, or answer a few questions, or import an old CV. MyVitea fills in a complete resume that the user edits. Lines it adds are highlighted so the user can check or remove them.
+- 9 modern templates, ATS-friendly layouts, export to PDF (print), HTML and text.
+- LinkedIn Studio: headline, About, experience, skills, education, banner and launch posts written from the user's resume.
+- Cover Letter Studio: tailored cover letters for a role and company.
+- Job Hub: job match score, keyword gaps, application tracker, interview practice with scored answers, follow-up message templates.
+- Works on phones and desktops. Resume data stays in the user's browser.
+
+## Key pages
+- [Home / app](https://myvitea.com/): the resume builder and all tools
+- [Sitemap](https://myvitea.com/sitemap.xml)
+
+## Facts
+- Price: free, no card needed. Sign-up uses a name and email.
+- Not affiliated with LinkedIn. LinkedIn is a trademark of its owner.
+- Contact and legal: Privacy and Terms are linked in the footer of the home page.

@@ -12,8 +12,9 @@ const MODEL = MODELS[0];
 const LOCAL = /\/\/(localhost|127\.0\.0\.1|\[::1\])/.test(BASE);
 const ENABLED = !!KEY || LOCAL;
 const ROOT = __dirname;
-const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.json': 'application/json', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml' };
-const STATIC_OK = new Set(['index.html', 'styles.css', 'app.js', 'ai.js', 'linkedin.js', 'cover.js', 'jobs.js', 'sw.js', 'manifest.webmanifest', 'robots.txt', 'sitemap.xml']);
+const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.json': 'application/json', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml', '.png': 'image/png', '.ico': 'image/x-icon' };
+const STATIC_OK = new Set(['index.html', 'styles.css', 'app.js', 'ai.js', 'linkedin.js', 'cover.js', 'jobs.js', 'sw.js', 'manifest.webmanifest', 'robots.txt', 'sitemap.xml', 'llms.txt', 'favicon.svg', 'favicon.ico', 'favicon-32.png', 'favicon-180.png', 'icon-192.png', 'icon-512.png', 'og.png', 'logo.svg']);
+const IDX_KEY = 'b7f3c1e94d2a48e5a0c6d1f2e3b4a597';
 
 /* ---------- prompts ---------- */
 const SCHEMA = `Return ONLY a JSON object with this exact shape (use "" or [] when unknown):
@@ -152,10 +153,75 @@ function readBody(req) {
   });
 }
 
+
+// ---------- Sign-ups + admin ----------
+const DATA_DIR = process.env.DATA_DIR || path.join(ROOT, 'data');
+const SIGNUPS = path.join(DATA_DIR, 'signups.jsonl');
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
+try { fs.mkdirSync(DATA_DIR, { recursive: true }); } catch (e) { console.error('data dir:', e.message); }
+const crypto = require('crypto');
+const emailRe = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/;
+const shits = new Map();
+function throttle(key, max, ms) { const n = Date.now(), a = (shits.get(key) || []).filter(t => n - t < ms); a.push(n); shits.set(key, a); return a.length > max; }
+function readSignups() { try { return fs.readFileSync(SIGNUPS, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l)); } catch (e) { return []; } }
+function clientIp(req) { return req.headers['x-forwarded-for']?.split(',')[0].trim() || req.socket.remoteAddress || ''; }
+function adminOk(req) {
+  if (!ADMIN_PASSWORD) return false;
+  const given = String(req.headers['x-admin-key'] || '');
+  const a = crypto.createHash('sha256').update(given).digest(), b = crypto.createHash('sha256').update(ADMIN_PASSWORD).digest();
+  return crypto.timingSafeEqual(a, b);
+}
+async function handleSignup(req, res) {
+  const ip = clientIp(req);
+  if (throttle('su:' + ip, 8, 3600e3)) return send(res, 429, { error: 'Too many attempts. Please try again later.' });
+  let d; try { d = JSON.parse(await readBody(req)); } catch (e) { return send(res, 400, { error: 'Bad request' }); }
+  const name = String(d.name || '').trim().slice(0, 80), email = String(d.email || '').trim().toLowerCase().slice(0, 254);
+  if (!name || !emailRe.test(email)) return send(res, 400, { error: 'Please enter your name and a valid email.' });
+  if (d.consent !== true) return send(res, 400, { error: 'Please tick the box to agree.' });
+  const all = readSignups();
+  const rec = { id: crypto.randomUUID(), name, email, at: new Date().toISOString(), source: String(d.source || 'web').slice(0, 30), ref: String(d.ref || '').slice(0, 120), ua: String(req.headers['user-agent'] || '').slice(0, 160), consent: true };
+  const existing = all.find(x => x.email === email);
+  if (!existing) {
+    try { fs.appendFileSync(SIGNUPS, JSON.stringify(rec) + '\n'); } catch (e) { console.error('signup write:', e.message); }
+    if (process.env.SIGNUP_WEBHOOK_URL) { fetch(process.env.SIGNUP_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(rec) }).catch(() => {}); }
+    console.log('NEW SIGNUP', rec.email);
+  }
+  return send(res, 200, { ok: true, returning: !!existing });
+}
+const ADMIN_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>MyVitea admin</title><link rel="icon" href="/favicon.svg"><style>
+body{font:15px/1.5 system-ui,sans-serif;background:#fbfcfd;color:#272735;margin:0}main{max-width:980px;margin:0 auto;padding:24px 16px}h1{font-size:22px;display:flex;gap:10px;align-items:center}h1 img{width:32px;height:32px}
+input,button{font:inherit;padding:10px 12px;border-radius:10px;border:1.5px solid #dde1e8}button{background:#111114;color:#fff;border:0;cursor:pointer;font-weight:600}button.g{background:#fff;color:#272735;border:1.5px solid #dde1e8}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.card{background:#fff;border:1px solid #e6e9ef;border-radius:14px;padding:14px 18px;min-width:140px}.card b{font-size:26px;display:block}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e6e9ef;border-radius:14px;overflow:hidden;font-size:14px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid #eef0f4}th{background:#f5f6f9;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.wrap{overflow-x:auto}.err{color:#b3261e}small{color:#6b7280}</style></head><body><main>
+<h1><img src="/favicon.svg" alt="">MyVitea admin</h1><div id="login"><p>Enter the admin password.</p><div class="row"><input id="pw" type="password" autocomplete="current-password" placeholder="Admin password"><button id="go">Sign in</button></div><p id="msg" class="err"></p></div>
+<div id="dash" hidden><div class="row"><div class="card"><small>Total sign-ups</small><b id="n">0</b></div><div class="card"><small>Last 7 days</small><b id="n7">0</b></div><div class="card"><small>Today</small><b id="n1">0</b></div></div>
+<div class="row"><input id="q" placeholder="Search name or email" style="flex:1;min-width:200px"><button class="g" id="csv">Download CSV</button><button class="g" id="out">Sign out</button></div><div class="wrap"><table><thead><tr><th>When</th><th>Name</th><th>Email</th><th>Source</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p><small>Note: on Render's free plan this list can reset when the server is redeployed. Download the CSV regularly.</small></p></div>
+<script>
+const $=s=>document.querySelector(s);let key=sessionStorage.getItem('mv.admin')||'',list=[];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function load(){const r=await fetch('/api/admin/signups',{headers:{'x-admin-key':key}});if(!r.ok){sessionStorage.removeItem('mv.admin');$('#login').hidden=false;$('#dash').hidden=true;$('#msg').textContent=r.status==429?'Too many tries. Wait a few minutes.':(r.status==503?'Admin is not set up on the server yet.':'Wrong password.');return}
+list=(await r.json()).signups.reverse();$('#login').hidden=true;$('#dash').hidden=false;draw()}
+function draw(){const q=$('#q').value.toLowerCase(),now=Date.now();$('#n').textContent=list.length;$('#n7').textContent=list.filter(x=>now-new Date(x.at)<6048e5).length;$('#n1').textContent=list.filter(x=>now-new Date(x.at)<864e5).length;
+$('#rows').innerHTML=list.filter(x=>(x.name+x.email).toLowerCase().includes(q)).map(x=>'<tr><td>'+esc(new Date(x.at).toLocaleString())+'</td><td>'+esc(x.name)+'</td><td>'+esc(x.email)+'</td><td>'+esc(x.source)+'</td></tr>').join('')||'<tr><td colspan=4>No sign-ups yet.</td></tr>'}
+$('#go').onclick=()=>{key=$('#pw').value;sessionStorage.setItem('mv.admin',key);load()};$('#pw').onkeydown=e=>{if(e.key=='Enter')$('#go').click()};$('#q').oninput=draw;$('#out').onclick=()=>{sessionStorage.removeItem('mv.admin');location.reload()};
+$('#csv').onclick=()=>{const c=s=>'"'+String(s).replace(/"/g,'""').replace(/^([=+@-])/,"'$1")+'"';const t='when,name,email,source\n'+list.map(x=>[x.at,x.name,x.email,x.source].map(c).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'}));a.download='myvitea-signups.csv';a.click()};
+if(key)load();
+</script></main></body></html>`;
+
 const server = http.createServer(async (req, res) => {
   const u = new URL(req.url, 'http://x');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
+  if (u.pathname === '/api/signup' && req.method === 'POST') return handleSignup(req, res);
+  if (u.pathname === '/admin') { res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' }); return res.end(ADMIN_HTML); }
+  if (u.pathname === '/api/admin/signups' && req.method === 'GET') {
+    if (!ADMIN_PASSWORD) return send(res, 503, { error: 'not set up' });
+    if (throttle('ad:' + clientIp(req), 10, 600e3)) return send(res, 429, { error: 'slow down' });
+    if (!adminOk(req)) return send(res, 401, { error: 'no' });
+    return send(res, 200, { signups: readSignups() });
+  }
+  if (u.pathname === '/' + IDX_KEY + '.txt') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end(IDX_KEY); }
   if (u.pathname === '/api/health') return send(res, 200, { ok: true, ai: ENABLED });
   if (u.pathname === '/api/ai' && req.method === 'POST') {
     if (!ENABLED) return send(res, 503, { error: 'AI is not configured on this server.' });
