@@ -468,6 +468,80 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
 .lp-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:var(--mute)}
 .lp-x{border:0;background:none;color:var(--ink2);font:inherit;text-decoration:underline;cursor:pointer}
 @media print{.linechip,.linepop{display:none!important}}
+
+/* ───── premium templates ───── */
+/* Metro: dark sidebar */
+.t-metro{display:grid;grid-template-columns:66mm 1fr;padding:0!important}
+.t-metro aside{background:#1d2030;color:#fff;padding:11mm 7mm;min-height:296mm;display:flex;flex-direction:column;gap:.3em}
+.t-metro aside .r-sec h2{color:#fff;border-bottom:1px solid #ffffff40;padding-bottom:.3em}
+.t-metro aside .r-contact{flex-direction:column;margin-top:.9em!important}
+.t-metro aside .r-date,.t-metro aside .r-sub{color:#c9ccdd}
+.t-metro aside .r-pills span{background:#ffffff1f;color:#fff}
+.t-metro aside .r-row{flex-direction:column;gap:0}
+.t-metro .r-ctitle{font-size:.82em;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--accent);filter:brightness(1.6);margin-top:1em}
+.t-metro .r-photo{width:7.5em;height:7.5em;margin:0 auto .6em;display:block;border:3px solid #ffffff30}
+.t-metro main{padding:12mm 11mm 12mm 10mm}
+.t-metro main header{padding-bottom:.7em;margin-bottom:.2em;border-bottom:4px solid var(--accent)}
+.t-metro .r-name{font-size:2.5em;letter-spacing:-.02em}
+.t-metro .r-title{color:#4a4e69;text-transform:uppercase;letter-spacing:.14em;font-size:.9em}
+.t-metro .r-pills .ai-new{background:#fff7d6!important;color:#222}
+/* Elegant */
+.t-elegant header{text-align:center;padding-bottom:.9em;border-bottom:3px double var(--accent);margin-bottom:.3em}
+.t-elegant .r-name{font-weight:400;letter-spacing:.16em;text-transform:uppercase;font-size:2.05em}
+.t-elegant .r-title{letter-spacing:.24em;text-transform:uppercase;font-size:.82em;color:#4a4e69;font-weight:500}
+.t-elegant .r-contact{justify-content:center}
+.t-elegant .r-photo{margin:0 auto .6em;display:block}
+.t-elegant .r-sec h2{display:flex;align-items:center;gap:.9em;border-bottom:0;letter-spacing:.3em;justify-content:center;color:var(--accent)}
+.t-elegant .r-sec h2::before,.t-elegant .r-sec h2::after{content:"";flex:1;height:1px;background:color-mix(in srgb,var(--accent) 55%,#fff)}
+.t-elegant .r-item .r-row b{font-weight:700}
+/* Timeline */
+.t-timeline header{border-left:6px solid var(--accent);padding-left:.8em}
+.t-timeline .r-sec .r-item{position:relative;padding-left:1.3em;margin-left:.45em;border-left:2px solid color-mix(in srgb,var(--accent) 30%,#fff)}
+.t-timeline .r-sec .r-item::before{content:"";position:absolute;left:-.46em;top:.3em;width:.7em;height:.7em;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px var(--accent)}
+.t-timeline .r-sec h2{border-bottom:0;font-size:.95em;background:color-mix(in srgb,var(--accent) 9%,#fff);padding:.35em .7em;border-radius:6px}
+/* Prism */
+.t-prism{padding:0!important}
+.t-prism header{background:linear-gradient(120deg,var(--accent),color-mix(in srgb,var(--accent) 50%,#000));color:#fff;padding:12mm 12mm 10mm;display:flex;gap:1.2em;align-items:center;border-radius:0 0 12mm 0}
+.t-prism header>div{flex:1}
+.t-prism .r-title{color:#fff;opacity:.92}
+.t-prism .r-photo{border:3px solid #ffffff88}
+.t-prism .r-body{padding:3mm 12mm 12mm}
+.t-prism .r-sec h2{background:color-mix(in srgb,var(--accent) 10%,#fff);border:0;border-left:4px solid var(--accent);padding:.38em .8em;border-radius:0 8px 8px 0}
+/* Executive */
+.t-executive{padding:0!important}
+.t-executive header{background:#14213d;color:#fff;padding:12mm 12mm 9mm;display:flex;gap:1.2em;align-items:center;border-bottom:5px solid var(--accent)}
+.t-executive header>div{flex:1}
+.t-executive .r-name{font-weight:600;letter-spacing:.02em}
+.t-executive .r-title{color:color-mix(in srgb,var(--accent) 40%,#fff);letter-spacing:.12em;text-transform:uppercase;font-size:.9em}
+.t-executive .r-body{padding:2mm 12mm 12mm}
+.t-executive .r-sec h2{color:#14213d;border-bottom:1px solid #14213d;letter-spacing:.22em}
+.t-executive .r-pills span{background:#eceef5;color:#14213d}
+.t-executive .r-photo{border:3px solid #ffffff55}
+.t-prism .r-pills .ai-new,.t-executive .r-pills .ai-new,.t-elegant .r-pills .ai-new,.t-timeline .r-pills .ai-new{background:#fff7d6!important}
+@media print{.page,.t-metro aside,.t-metro main,.t-prism .r-body,.t-executive .r-body{box-decoration-break:clone;-webkit-box-decoration-break:clone}.t-metro aside,.t-prism header,.t-executive header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ───── mobile: bigger, calmer, thumb-friendly ───── */
+.preview-tools .seg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;max-width:100%}
+.preview-tools .seg::-webkit-scrollbar{display:none}
+.preview-tools .seg button{white-space:nowrap;flex:none;scroll-snap-align:center}
+@media (max-width:980px){
+  .btn,.choice,.chip,.tab,.seg button,.icon-btn,.menu button{min-height:46px}
+  .tpl-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .tpl{padding:10px;border-radius:16px}
+  .preview-tools{position:sticky;top:0;z-index:7;background:var(--page);padding:8px 0;margin:0 -2px}
+  .preview-tools .seg button{padding:10px 16px;font-size:14px}
+  .edithint{font-size:12.5px}
+  .modal-card,.sheet{border-radius:24px 24px 0 0}
+  .modal-actions .btn{flex:1 1 100%}
+  .field label{font-size:14px}
+  input[type=range]{height:34px}
+  .sw{width:40px;height:40px}
+  .linechip{padding:10px 16px;font-size:14px}
+  .tick{padding:12px 4px}
+  .tick input{width:22px;height:22px}
+}
+@media (max-width:420px){.choice{padding:16px}.choice b{font-size:16.5px}}
+@media (max-width:980px){#aiBar{display:flex!important;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;font-size:13px;text-align:left;line-height:1.3}#aiBar[hidden]{display:none!important}#aiBar button{flex:none;min-height:36px;padding:6px 12px;font-size:13px}}
 </style>
 </head>
 <body>
@@ -535,6 +609,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
     <h1 id="wTitle">A resume built in <span class="px">10 minutes.</span></h1>
     <p>Answer a few plain questions. Your resume builds itself on the right, and you can change the look at any time. Nothing leaves your device.</p>
     <div class="choices">
+      <button class="choice" data-action="start-quick"><b>⚡ Just my name and job</b><span>Fastest. We write a full, polished CV from almost nothing.</span></button>
       <button class="choice" data-action="start-ai"><b>✨ Answer a few questions</b><span>We write the resume for you. Easiest way, about 3 minutes.</span></button>
       <button class="choice" data-action="start-import"><b>📄 I have an old CV</b><span>Upload or paste it and we modernise it.</span></button>
       <button class="choice" data-action="start-blank"><b>✏️ Build it step by step</b><span>Fill in each section yourself.</span></button>
@@ -604,7 +679,12 @@ const TEMPLATES = [
   { id: 'sidebar', name: 'Aurora', note: 'Tinted sidebar. Great for one page.' },
   { id: 'classic', name: 'Ledger', note: 'Centered and traditional. Safest for ATS.' },
   { id: 'banner', name: 'Horizon', note: 'Bold colour header. Stands out.' },
-  { id: 'compact', name: 'Index', note: 'Labels left, details right. Fits a lot.' }
+  { id: 'compact', name: 'Index', note: 'Labels left, details right. Fits a lot.' },
+  { id: 'metro', name: 'Metro', note: 'Dark sidebar, modern and confident.' },
+  { id: 'elegant', name: 'Elegant', note: 'Refined centered style with fine rules.' },
+  { id: 'timeline', name: 'Timeline', note: 'Career shown as a clear vertical path.' },
+  { id: 'prism', name: 'Prism', note: 'Gradient header with soft section tabs.' },
+  { id: 'executive', name: 'Executive', note: 'Navy header. Senior and formal.' }
 ];
 const ACCENTS = ['#5266eb', '#111111', '#188554', '#c45000', '#7c3aed', '#c2185b', '#0f6fde'];
 const VERBS = {
@@ -743,12 +823,17 @@ const VIEWS = {
 
 function thumb(id) {
   const a = '#8a8fb5', b = '#d3d6e8';
-  const bars = (x, y, w, n) => Array.from({ length: n }, (_, i) => `<rect x="${x}" y="${y + i * 7}" width="${w - (i % 3) * 8}" height="3" rx="1.5" fill="${b}"/>`).join('');
+  const bars = (x, y, w, n, c = b) => Array.from({ length: n }, (_, i) => `<rect x="${x}" y="${y + i * 7}" width="${w - (i % 3) * 8}" height="3" rx="1.5" fill="${c}"/>`).join('');
   const body = {
     sidebar: `<rect width="38" height="100" fill="#dfe0fb"/><circle cx="19" cy="16" r="8" fill="${a}"/>${bars(6, 32, 26, 6)}<rect x="46" y="8" width="60" height="7" rx="3" fill="${a}"/>${bars(46, 24, 68, 10)}`,
     classic: `<rect x="30" y="8" width="60" height="7" rx="3" fill="${a}"/><rect x="10" y="22" width="100" height="1.5" fill="${a}"/>${bars(10, 30, 100, 11)}`,
     banner: `<rect width="120" height="26" fill="#5266eb"/><rect x="10" y="9" width="50" height="7" rx="3" fill="#fff"/>${bars(10, 36, 100, 10)}`,
-    compact: `<rect x="8" y="8" width="55" height="7" rx="3" fill="${a}"/>${[0, 1, 2].map(k => `<rect x="8" y="${26 + k * 24}" width="20" height="3" fill="${a}"/>${bars(36, 26 + k * 24, 76, 3)}`).join('')}`
+    compact: `<rect x="8" y="8" width="55" height="7" rx="3" fill="${a}"/>${[0, 1, 2].map(k => `<rect x="8" y="${26 + k * 24}" width="20" height="3" fill="${a}"/>${bars(36, 26 + k * 24, 76, 3)}`).join('')}`,
+    metro: `<rect width="42" height="100" fill="#1d2030"/><circle cx="21" cy="16" r="8" fill="#8a8fb5"/>${bars(7, 32, 28, 6, '#ffffff55')}<rect x="50" y="8" width="58" height="7" rx="3" fill="#1d2030"/><rect x="50" y="18" width="20" height="2" fill="#5266eb"/>${bars(50, 28, 62, 9)}`,
+    elegant: `<rect x="28" y="8" width="64" height="6" rx="3" fill="${a}"/><rect x="10" y="20" width="100" height="1" fill="#5266eb"/><rect x="10" y="23" width="100" height="1" fill="#5266eb"/>${[0, 1, 2].map(k => `<rect x="46" y="${33 + k * 22}" width="28" height="3" rx="1.5" fill="#5266eb"/><rect x="10" y="${35 + k * 22}" width="30" height="1" fill="#5266eb"/><rect x="80" y="${35 + k * 22}" width="30" height="1" fill="#5266eb"/>${bars(10, 41 + k * 22, 100, 2)}`).join('')}`,
+    timeline: `<rect x="8" y="8" width="3" height="14" fill="#5266eb"/><rect x="15" y="8" width="55" height="7" rx="3" fill="${a}"/><rect x="22" y="30" width="1.5" height="62" fill="#c3c9f5"/>${[0, 1, 2].map(k => `<circle cx="22.7" cy="${34 + k * 22}" r="3" fill="#5266eb"/>${bars(32, 32 + k * 22, 76, 3)}`).join('')}`,
+    prism: `<defs><linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#5266eb"/><stop offset="1" stop-color="#2a3584"/></linearGradient></defs><path d="M0 0H120V22Q120 30 112 30H0Z" fill="url(#pg)"/><rect x="10" y="9" width="50" height="7" rx="3" fill="#fff"/>${[0, 1, 2].map(k => `<rect x="0" y="${38 + k * 20}" width="46" height="8" rx="2" fill="#e4e8fd"/><rect x="0" y="${38 + k * 20}" width="2.5" height="8" fill="#5266eb"/>${bars(10, 50 + k * 20, 100, 1)}`).join('')}`,
+    executive: `<rect width="120" height="28" fill="#14213d"/><rect y="28" width="120" height="2.5" fill="#5266eb"/><rect x="10" y="9" width="52" height="7" rx="3" fill="#fff"/><rect x="10" y="20" width="30" height="2" fill="#ffffff88"/>${[0, 1].map(k => `<rect x="10" y="${42 + k * 26}" width="30" height="3" fill="#14213d"/><rect x="10" y="${47 + k * 26}" width="100" height="0.8" fill="#14213d"/>${bars(10, 52 + k * 26, 100, 2)}`).join('')}`
   }[id];
   return `<svg viewBox="0 0 120 100" aria-hidden="true">${body}</svg>`;
 }
@@ -789,14 +874,14 @@ const nameHTML = s => `<h1 class="r-name" data-ed="personal.name" data-ph="Your 
 function resumeHTML(s) {
   const keys = visible(s), all = k => SECTIONS[k](s);
   switch (s.template) {
-    case 'sidebar': {
+    case 'sidebar': case 'metro': {
       const side = ['skills', 'languages', 'certifications'];
       return `<aside>${photoHTML(s)}<div class="r-ctitle">Contact</div>${contactHTML(s.personal)}${keys.filter(k => side.includes(k)).map(all).join('')}</aside>
         <main><header>${nameHTML(s)}</header>${keys.filter(k => !side.includes(k)).map(all).join('')}</main>`;
     }
     case 'classic':
       return `<header class="r-head">${photoHTML(s)}${nameHTML(s)}${contactHTML(s.personal)}</header>${keys.map(all).join('')}`;
-    case 'banner':
+    case 'banner': case 'prism': case 'executive':
       return `<header>${photoHTML(s)}<div>${nameHTML(s)}${contactHTML(s.personal)}</div></header><div class="r-body">${keys.map(all).join('')}</div>`;
     default:
       return `<header>${nameHTML(s)}${contactHTML(s.personal)}</header>${keys.map(all).join('')}`;
@@ -804,6 +889,16 @@ function resumeHTML(s) {
 }
 
 let rafId;
+function tuneInputs() {
+  document.querySelectorAll('#stepBody [data-path]').forEach(el => {
+    const k = el.dataset.path || '';
+    if (/email$/.test(k)) { el.type = 'email'; el.setAttribute('inputmode', 'email'); el.setAttribute('autocomplete', 'email'); el.setAttribute('autocapitalize', 'off'); }
+    else if (/phone$/.test(k)) { el.setAttribute('inputmode', 'tel'); el.setAttribute('autocomplete', 'tel'); }
+    else if (/(website|linkedin|link)$/.test(k)) { el.setAttribute('inputmode', 'url'); el.setAttribute('autocapitalize', 'off'); el.setAttribute('autocorrect', 'off'); }
+    else if (k === 'personal.name') el.setAttribute('autocomplete', 'name');
+    else if (el.tagName === 'INPUT' && el.type === 'text') el.setAttribute('enterkeyhint', 'next');
+  });
+}
 function renderPreview() {
   cancelAnimationFrame(rafId);
   rafId = requestAnimationFrame(() => {
@@ -954,7 +1049,7 @@ function renderEditor(keepScroll) {
   body.innerHTML = VIEWS[STEPS[step].id]();
   const f = $('#fontSel'); if (f) f.value = S.font;
   body.scrollTop = keepScroll ? y : 0;
-  renderSteps(); bulletHints(); sumHint();
+  renderSteps(); bulletHints(); sumHint(); tuneInputs();
 }
 function go(i) { step = Math.max(0, Math.min(STEPS.length - 1, i)); renderEditor(); if (matchMedia('(max-width:980px)').matches) window.scrollTo(0, 0); }
 
@@ -1049,6 +1144,7 @@ const A = {
   'download-html': () => download((S.personal.name || 'resume').replace(/\W+/g, '-') + '.html', standalone(), 'text/html'),
   reset: () => { if (confirm('Delete everything and start over?')) { S = blank(); step = 0; renderEditor(); renderPreview(); save(); } },
   'start-blank': () => { $('#welcome').hidden = true; },
+  'start-quick': () => { $('#welcome').hidden = true; window.FolioAI && window.FolioAI.actions.quick(); },
   'start-ai': () => { $('#welcome').hidden = true; window.FolioAI && window.FolioAI.actions.interview(); },
   'start-import': () => { $('#welcome').hidden = true; window.FolioAI && window.FolioAI.actions.import(); },
   'start-sample': () => { S = SAMPLE(); step = 0; $('#welcome').hidden = true; renderEditor(); renderPreview(); save(); }
@@ -1217,17 +1313,29 @@ const ROLES = [
   [/driver|logistics|warehouse|dispatch|delivery|supply/i, ['Delivered goods safely and on schedule', 'Checked loads, paperwork and vehicles before and after trips', 'Kept accurate delivery and stock records', 'Followed safety rules and company procedures'], ['Route planning', 'Inventory control', 'Health and safety', 'Time management', 'Record keeping', 'Reliability']],
   [/nurse|health|care ?giver|clinic|pharmac|medical/i, ['Provided safe, compassionate care to patients', 'Recorded observations and treatments accurately', 'Followed infection-control and safety protocols', 'Communicated clearly with patients, families and colleagues'], ['Patient care', 'Infection control', 'Record keeping', 'Communication', 'Teamwork', 'Empathy']]
 ];
+ROLES.push(
+  [/hotel|hospitality|waiter|waitress|chef|cook|restaurant|bartender|barista|catering/i, ['Welcomed guests warmly and delivered fast, friendly service', 'Prepared and served food and drinks to a high standard', 'Kept work areas clean and followed food-hygiene rules', 'Handled orders, payments and special requests accurately'], ['Customer service', 'Food hygiene', 'Teamwork', 'Cash handling', 'Time management', 'Upselling']],
+  [/security|guard|safety officer|surveill/i, ['Patrolled assigned areas and reported incidents promptly', 'Controlled access and checked visitors and vehicles', 'Wrote clear incident and shift reports', 'Responded calmly to emergencies and followed safety procedures'], ['Surveillance', 'Incident reporting', 'Access control', 'Emergency response', 'Vigilance']],
+  [/design|graphic|ui|ux|creative|photograph|video|content|social media|writer|copy/i, ['Created clear, eye-catching work that matched client briefs', 'Managed projects from idea to delivery on deadline', 'Used feedback to refine and improve final results', 'Kept brand style consistent across channels'], ['Creativity', 'Adobe Photoshop', 'Canva', 'Storytelling', 'Brand consistency', 'Social media']],
+  [/human resource|hr\b|recruit|talent|people ops/i, ['Screened candidates and coordinated interviews', 'Maintained accurate employee records and documentation', 'Supported onboarding and staff welfare', 'Handled staff queries with discretion and fairness'], ['Recruitment', 'Onboarding', 'Employee relations', 'Record keeping', 'Confidentiality']],
+  [/electric|mechanic|technician|plumb|welder|fitter|carpent|construction|mason|artisan|maintenance|operator/i, ['Installed, repaired and maintained equipment to specification', 'Diagnosed faults and fixed them quickly and safely', 'Followed safety rules and used tools and PPE correctly', 'Kept clear records of jobs completed and parts used'], ['Fault finding', 'Equipment maintenance', 'Health and safety', 'Technical drawings', 'Hand and power tools']],
+  [/bank|teller|loan|credit|insurance|cashier|relationship officer/i, ['Served customers with accurate, confidential transactions', 'Explained products and services clearly and met targets', 'Followed compliance and anti-fraud procedures', 'Balanced cash and records at the end of every shift'], ['Banking operations', 'Compliance', 'Customer relationships', 'Cash handling', 'Attention to detail']],
+  [/manager|supervisor|team lead|coordinator|director|head of/i, ['Led and motivated a team to hit targets and deadlines', 'Planned work, assigned tasks and tracked progress', 'Coached staff and solved problems before they grew', 'Reported results and improvements to senior management'], ['Leadership', 'Planning', 'Coaching', 'Reporting', 'Decision making', 'Budgeting']]
+);
+const GENERIC = { bullets: ['Delivered consistent, high-quality work and met deadlines', 'Worked closely with colleagues and supervisors to reach team goals', 'Followed company procedures, safety rules and quality standards', 'Learned new tools and processes quickly and helped train others', 'Communicated clearly with customers, colleagues and managers'], skills: ['Teamwork', 'Communication', 'Time management', 'Problem solving', 'Attention to detail', 'Reliability', 'Microsoft Office', 'Adaptability', 'Organisation', 'Customer focus', 'Initiative', 'Planning'] };
 function roleBoost(title, extra) {
   const hit = ROLES.find(r => r[0].test(String(title || '') + ' ' + String(extra || '')));
-  return hit ? { bullets: hit[1], skills: hit[2] } : { bullets: [], skills: [] };
+  return hit ? { bullets: hit[1], skills: hit[2] } : { bullets: GENERIC.bullets, skills: GENERIC.skills };
 }
 function localSummary(a) {
-  const j = (a.jobs || []).find(x => x.role) || {}, sk = String(a.skills || '').split(/[,\n;]/).map(str).filter(Boolean).slice(0, 3);
+  const j = (a.jobs || []).find(x => x.role) || {}, mine = String(a.skills || '').split(/[,\n;]/).map(str).filter(Boolean);
   const t = str(a.title) || j.role || 'Professional';
+  const sk = (mine.length ? mine : roleBoost(t).skills).slice(0, 4);
   const co = j.company ? j.company.replace(/[.\s]+$/, '') : '';
   let s = `${CAP(t)}` + (j.role && co ? (j.role.toLowerCase() === t.toLowerCase() ? ` with hands-on experience at ${co}.` : ` with hands-on experience as ${j.role} at ${co}.`) : ' ready to contribute from day one.');
-  if (sk.length) s += ` Skilled in ${sk.slice(0, -1).join(', ')}${sk.length > 1 ? ' and ' : ''}${sk[sk.length - 1]}.`;
-  return s + ' Reliable, quick to learn and focused on doing quality work.';
+  if (sk.length) s += ` Strong in ${sk.slice(0, -1).join(', ')}${sk.length > 1 ? ' and ' : ''}${sk[sk.length - 1]}.`;
+  s += ' Known for reliable, accurate work and a calm, professional approach under pressure.';
+  return s + ' Quick to learn, a dependable team player, and focused on delivering quality results.';
 }
 function localGenerate(a) {
   const mon = v => ym(v);
@@ -1371,41 +1479,88 @@ const loading = msgs => {
 const isMobile = () => matchMedia('(max-width:980px)').matches;
 
 /* ───────── apply result + celebrate ───────── */
-function apply(data, label) {
-  /* split out AI "suggested" extras so the user confirms them before they land on the CV */
-  const keepJob = x => x && (x.role || x.company);
-  const jobs = (Array.isArray(data.experience) ? data.experience : []).filter(keepJob);
-  data.experience = jobs;
-  const sugB = jobs.map(e => (Array.isArray(e.suggested) ? e.suggested : []).map(str).filter(Boolean).slice(0, 4));
+/* guarantee a full CV: top up summary, bullets and skills from role knowledge, whatever the user gave us */
+const lineList = v => (Array.isArray(v) ? v : String(v || '').split('\n')).map(x => str(x).replace(/^[-*\u2022]\s*/, '')).filter(Boolean);
+function enrich(data) {
+  data.personal = data.personal || {};
+  const title = str(data.personal.title);
+  data.experience = (Array.isArray(data.experience) ? data.experience : []).filter(x => x && (x.role || x.company));
+  if (!data.experience.length && title) data.experience = [{ role: title, company: '', start: '', end: '', current: false, bullets: [], suggested: [] }];
+  data.experience.forEach(e => {
+    const mine = lineList(e.bullets), boost = roleBoost(e.role || title, '').bullets;
+    const have = new Set(mine.map(x => x.toLowerCase())), words = t => t.split(/\s+/).length;
+    let sug = lineList(e.suggested).filter(x => words(x) >= 4 && !have.has(x.toLowerCase()));
+    boost.forEach(b => { if (!have.has(b.toLowerCase()) && !sug.some(x => x.toLowerCase() === b.toLowerCase())) sug.push(b); });
+    const target = 6, need = Math.max(0, target - mine.length);
+    e.suggested = sug.slice(0, mine.length >= 6 ? 0 : Math.max(need, Math.min(sug.length, 2)));
+  });
   const have = new Set((Array.isArray(data.skills) ? data.skills : []).map(k => str(k).toLowerCase()));
-  const sugS = [...new Set((Array.isArray(data.suggestedSkills) ? data.suggestedSkills : []).map(str).filter(k => k && !have.has(k.toLowerCase())))].slice(0, 10);
+  const pool = [...lineList(data.suggestedSkills), ...roleBoost(title || (data.experience[0] || {}).role, '').skills, ...GENERIC.skills];
+  const need = Math.max(0, 12 - have.size), out = [];
+  pool.forEach(k => { const l = k.toLowerCase(); if (out.length < need && !have.has(l) && !out.some(x => x.toLowerCase() === l)) out.push(k); });
+  data.suggestedSkills = out;
+  if (str(data.summary).split(/\s+/).length < 22) data.summary = localSummary({ title, skills: (data.skills || []).join(', '), jobs: data.experience });
+  const todo = [], P = data.personal;
+  if (!str(P.email) || !str(P.phone)) todo.push('Add your email and phone number so employers can reach you.');
+  if (!(data.experience[0] && str(data.experience[0].company))) todo.push('Add the company name and dates for your job.');
+  else if (data.experience.length < 2) todo.push('Add an earlier job or internship if you have one.');
+  if (!(data.education || []).length) todo.push('Add where you studied (school, course, year).');
+  data.tips = todo.concat(Array.isArray(data.tips) ? data.tips : []);
+  return data;
+}
+function apply(data, label) {
+  enrich(data);
+  const jobs = data.experience;
+  const sugB = jobs.map(e => e.suggested.slice(0, 6));
+  const sugS = data.suggestedSkills.slice(0, 12);
+  /* everything is added straight away (so the CV is never thin) and marked yellow; the review lets the user untick what is not true */
+  jobs.forEach((e, i) => { e.bullets = lineList(e.bullets).concat(sugB[i]); });
+  data.skills = (Array.isArray(data.skills) ? data.skills : []).concat(sugS);
   const next = normalize(data, F().state);
   F().replace(next);
+  F().patch(s => { s.aiAdded = (s.aiAdded || []).concat(sugB.flat(), sugS).map(x => String(x).trim()); });
   const tips = (data.tips || []).map(str).filter(Boolean).slice(0, 4);
-  const anySug = sugB.some(x => x.length) || sugS.length;
-  const review = anySug ? `<div class="boost"><b>✨ We filled in the gaps</b><p class="hint">Based on your job titles, these are duties and skills usually part of the role. Untick anything that is not true for you.</p>
-    ${sugB.map((bl, i) => bl.length ? `<div class="bgroup"><span class="lbl">${esc(jobs[i].role || 'Job')}${jobs[i].company ? ' · ' + esc(jobs[i].company) : ''}</span>${bl.map((x, j) => `<label class="tick"><input type="checkbox" data-sb="${i}:${j}" checked><span>${esc(x)}</span></label>`).join('')}</div>` : '').join('')}
-    ${sugS.length ? `<div class="bgroup"><span class="lbl">Skills recruiters search for</span><div class="tickrow">${sugS.map((x, j) => `<label class="tick pill"><input type="checkbox" data-ss="${j}" checked><span>${esc(x)}</span></label>`).join('')}</div></div>` : ''}</div>` : '';
-  open(`<p class="eyebrow">${esc(label)}</p><h2>Your CV is ready 🎉</h2>
-    <p class="lead">${anySug ? 'Review the extras below, then take a look.' : 'Take a look, then fix anything that is not quite right. You can edit every line.'}</p>
+  const norm = t => str(t).toLowerCase().replace(/[.\s]+$/, '');
+  const review = `<div class="boost"><b>\u2728 We filled in the gaps</b><p class="hint">These lines are typical for your kind of work. They are already on your CV, highlighted yellow. <b>Untick anything that is not true for you</b> and it is removed.</p>
+    ${sugB.map((bl, i) => bl.length ? `<div class="bgroup"><span class="lbl">${esc(jobs[i].role || 'Job')}${jobs[i].company ? ' \u00b7 ' + esc(jobs[i].company) : ''}</span>${bl.map((x, j) => `<label class="tick"><input type="checkbox" data-sb="${i}:${j}" checked><span>${esc(x)}</span></label>`).join('')}</div>` : '').join('')}
+    ${sugS.length ? `<div class="bgroup"><span class="lbl">Skills recruiters search for</span><div class="tickrow">${sugS.map((x, j) => `<label class="tick pill"><input type="checkbox" data-ss="${j}" checked><span>${esc(x)}</span></label>`).join('')}</div></div>` : ''}</div>`;
+  open(`<p class="eyebrow">${esc(label)}</p><h2>Your CV is ready \ud83c\udf89</h2>
+    <p class="lead">It is full and ready. Check the highlighted extras, then take a look. You can edit every line.</p>
     <div class="iv-scroll mid">${review}${tips.length ? `<div class="tip"><b>To make it even stronger</b><ul>${tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>` : ''}</div>
-    <div class="modal-actions"><button class="btn primary big" data-ai="see">${anySug ? 'Add selected and see my CV' : 'See my CV'}</button><button class="btn big" data-ai="edit">Edit details</button></div>`);
+    <div class="modal-actions"><button class="btn primary big" data-ai="see">See my CV</button><button class="btn big" data-ai="edit">Edit details</button></div>`);
   const sh = $('.sheet');
   sh.onclick = e => {
     const btn = e.target.closest('button[data-ai]'); if (!btn) return; const a = btn.dataset.ai;
-    if (anySug && (a === 'see' || a === 'edit')) {
-      const pickB = sugB.map((bl, i) => bl.filter((_, j) => { const c = sh.querySelector(`[data-sb="${i}:${j}"]`); return c && c.checked; }));
-      const pickS = sugS.filter((_, j) => { const c = sh.querySelector(`[data-ss="${j}"]`); return c && c.checked; });
-      F().patch(s => {
-        pickB.forEach((bl, i) => { if (bl.length && s.experience[i]) s.experience[i].bullets = (s.experience[i].bullets ? s.experience[i].bullets + '\n' : '') + bl.join('\n'); });
-        pickS.forEach(k => { if (!s.skills.some(x => x.toLowerCase() === k.toLowerCase())) s.skills.push(k); });
-        s.aiAdded = (s.aiAdded || []).concat(pickB.flat(), pickS).map(x => String(x).replace(/^[-•*]\s*/, '').trim());
+    if (a === 'see' || a === 'edit') {
+      const dropB = sugB.map((bl, i) => bl.filter((_, j) => { const c = sh.querySelector(`[data-sb="${i}:${j}"]`); return c && !c.checked; }).map(norm));
+      const dropS = sugS.filter((_, j) => { const c = sh.querySelector(`[data-ss="${j}"]`); return c && !c.checked; }).map(norm);
+      if (dropB.flat().length || dropS.length) F().patch(s => {
+        dropB.forEach((bl, i) => { if (bl.length && s.experience[i]) s.experience[i].bullets = String(s.experience[i].bullets || '').split('\n').filter(l => !bl.includes(norm(l))).join('\n'); });
+        s.skills = s.skills.filter(k => !dropS.includes(norm(k)));
+        const gone = new Set(dropB.flat().concat(dropS)); s.aiAdded = (s.aiAdded || []).filter(x => !gone.has(norm(x)));
       });
     }
     close();
     if (a === 'see' && isMobile()) F().pane('preview');
     if (a === 'edit') { F().pane('edit'); F().goto(0); }
   };
+}
+
+/* one-tap "make it fuller" for a CV the user built or imported themselves */
+function makeFuller() {
+  const s0 = F().state;
+  if (!s0.personal.name && !s0.personal.title && !s0.experience.length) return F().toast('Add your name and job title first.');
+  const data = { personal: { ...s0.personal }, summary: s0.summary, skills: s0.skills.slice(), experience: s0.experience.map(x => ({ role: x.role, company: x.company, bullets: lineList(x.bullets), suggested: [] })) };
+  enrich(data);
+  const added = [];
+  F().patch(s => {
+    data.experience.forEach((e, i) => { if (s.experience[i] && e.suggested.length) { s.experience[i].bullets = lineList(s.experience[i].bullets).concat(e.suggested).join('\n'); added.push(...e.suggested); } });
+    const sk = data.suggestedSkills.slice(0, 8); sk.forEach(k => s.skills.push(k)); added.push(...sk);
+    if (str(s.summary).split(/\s+/).length < 22) { s.summary = data.summary; }
+    s.aiAdded = (s.aiAdded || []).concat(added).map(x => String(x).trim());
+  });
+  F().toast(added.length ? added.length + ' lines added and highlighted yellow. Edit or delete any that are not true.' : 'Your CV is already full.');
+  if (isMobile()) F().pane('preview');
 }
 
 /* ───────── interview ───────── */
@@ -1589,11 +1744,32 @@ async function withAI(msgs, fn) {
 }
 
 const ctx = () => { const s = F().state; return { title: s.personal.title, skills: s.skills.slice(0, 10) }; };
+function quick() {
+  const sh = open(`<div class="iv-top"><p class="eyebrow" style="margin:0">\u26a1 Fastest way</p><button class="icon-btn" data-ai="close" aria-label="Close">\u2715</button></div>
+    <h2>Just your name and job</h2><p class="lead">That is all we need. We write a full, polished CV and fill in everything else. You can edit anything after.</p>
+    ${fld('qName', 'Your full name', F().state.personal.name, { ph: 'e.g. Amara Okafor', ac: 'name' })}
+    ${fld('qTitle', 'Job you want', F().state.personal.title, { ph: 'e.g. Sales Executive, Nurse, Electrician' })}
+    ${fld('qCo', 'Last place you worked (optional)', '', { ph: 'e.g. Jumia Nigeria' })}
+    ${fld('qSk', 'Skills you have (optional, comma separated)', '', { ph: 'e.g. Excel, customer service' })}
+    <div class="hint bad" id="qErr"></div>
+    <div class="modal-actions"><button class="btn primary big" data-ai="go">\u2728 Build my full CV</button></div>`);
+  sh.onclick = e => {
+    const b = e.target.closest('button[data-ai]'); if (!b) return;
+    if (b.dataset.ai === 'close') return close();
+    const g = id => str(document.getElementById(id).value), name = g('qName'), title = g('qTitle');
+    if (!name || !title) return void (document.getElementById('qErr').textContent = 'Please enter your name and the job you want.');
+    iv = { i: 0, a: { name, title, email: '', phone: '', location: '', jobs: g('qCo') ? [{ ...newJob(), role: title, company: g('qCo') }] : [], school: '', degree: '', eduEnd: '', skills: g('qSk'), extras: '', tone: 'bold' } };
+    ivFinish();
+  };
+  sh.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); const f = [...sh.querySelectorAll('input')], n = f[f.indexOf(e.target) + 1]; n ? n.focus() : sh.querySelector('button[data-ai=go]').click(); } });
+}
 const actions = {
-  interview, import: importCV,
+  interview, quick, fuller: makeFuller, import: importCV,
   'ai-menu': () => {
     const sh = open(`<div class="iv-top"><p class="eyebrow" style="margin:0">AI assistant · ${available ? '<span class="good">connected</span>' : 'offline helper'}</p><button class="icon-btn" data-ai="close" aria-label="Close">✕</button></div>
       <h2>How can we help?</h2><div class="choices">
+      <button class="choice" data-ai="quick"><b>\u26a1 Just my name and job</b><span>Fastest. We write a full CV from almost nothing.</span></button>
+      <button class="choice" data-ai="fuller"><b>\ud83d\udd0b Make my CV fuller</b><span>Adds missing bullets, skills and summary, marked yellow.</span></button>
       <button class="choice" data-ai="interview"><b>✨ Build my CV from questions</b><span>Answer a few questions, we write everything.</span></button>
       <button class="choice" data-ai="import"><b>📄 Import an old CV</b><span>Upload or paste, we modernise it.</span></button>
       <button class="choice" data-ai="ai-summary"><b>📝 Write my summary</b><span>A strong opening paragraph.</span></button>
@@ -1726,7 +1902,7 @@ function lineHelper() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') kill(); });
 }
 
-window.FolioAI = { actions, init, _ui: { open, close, loading, ai, esc, str, available: () => available }, _t: { restoreJobs, guard, localParse, localGenerate, normalize, polishLine } };
+window.FolioAI = { actions, init, _ui: { open, close, loading, ai, esc, str, available: () => available }, _t: { enrich, restoreJobs, guard, localParse, localGenerate, normalize, polishLine } };
 init();
 lineHelper();
 })();
