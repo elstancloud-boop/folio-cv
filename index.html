@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Folio | Free AI Resume Builder &amp; CV Maker</title>
-<meta name="description" content="Create an ATS-friendly resume or CV in minutes with Folio’s free AI resume builder. Import an old CV, tailor it to a job, and download a polished PDF.">
-<meta property="og:title" content="Folio | Free AI Resume Builder &amp; CV Maker">
-<meta property="og:description" content="Create an ATS-friendly resume or CV in minutes. Build with AI, tailor to a job, and download a polished PDF.">
+<title>Folio | AI Resume Builder &amp; LinkedIn Profile Generator</title>
+<meta name="description" content="Free AI resume builder and CV maker to create a tailored resume, LinkedIn profile, posts and job-specific cover letters. Preview and download a polished PDF.">
+<meta property="og:title" content="Folio | AI Resume Builder &amp; LinkedIn Profile Generator">
+<meta property="og:description" content="Build a tailored resume, LinkedIn profile, posts, and cover letters with Folio’s free AI career toolkit.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#fbfcfd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Cpath d='M10 8h13v4h-8.5v3.5H21v4h-6.5V25h-4.5z' fill='%23fff'/%3E%3C/svg%3E">
@@ -558,12 +558,88 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
 .gal-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .gal-btns .btn{flex:1 1 auto;min-height:44px}
 @media (max-width:760px){.gal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gal-btns{flex-direction:column}}
+
+/* ───── Job Hub ───── */
+.modal-card.sheet.hub{width:min(780px,100%);max-width:780px}
+.hub .litabs{margin:4px 0 14px}
+.hub .sep{border:0;border-top:1px solid var(--line);margin:20px 0}
+.hub .btn-row.wrap{flex-wrap:wrap;gap:8px}
+.hub .btn-row .btn{min-height:44px}
+.hub select{width:100%;min-height:44px;border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font:inherit;background:#fff;color:var(--ink)}
+.hub input[type=date]{min-height:44px;border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font:inherit;width:100%}
+.sbars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 22px;margin:4px 0 16px}
+.sbar{display:grid;grid-template-columns:78px 1fr 28px;gap:8px;align-items:center;font-size:13px;color:var(--ink2)}
+.sbar i{height:8px;border-radius:99px;background:var(--line);overflow:hidden;display:block}
+.sbar b{display:block;height:100%;background:var(--indigo);border-radius:99px}
+.sbar em{font-style:normal;font-family:var(--mono);font-size:12px;text-align:right}
+.chip.on{background:#111;color:#fff;border-color:#111}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.stats div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.stats b{display:block;font:400 22px var(--sans)}.stats span{font-size:12px;color:var(--mute)}
+.stagechips{overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+.stagechips .chip{flex:none;min-height:40px;cursor:pointer;font:inherit;font-size:13px}
+.stagechips .chip b{font-family:var(--mono);font-weight:500;opacity:.7}
+.jcard{border:1.5px solid var(--line);border-radius:16px;padding:14px;margin:10px 0;background:#fff}
+.jcard.addj{background:var(--bg)}
+.jtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.badge{flex:none;min-width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:3px solid var(--c);font:500 14px var(--mono)}
+.coach{margin:8px 0;font-size:13px;color:var(--ink2);line-height:1.45}
+.jrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.jrow select{flex:1 1 130px;width:auto}
+.jdet{margin-top:12px;display:grid;gap:10px}
+.btn.danger{color:#c2261a;border-color:#f0c4bf}
+.empty{text-align:center;padding:22px 0}
+.qcard{border:1.5px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
+.qcard .q{font-weight:600;margin:6px 0 10px;color:var(--ink);line-height:1.45}
+.qcard textarea{width:100%}
+.res{background:var(--bg);border-radius:12px;padding:10px 14px;margin-top:10px}.res ul{margin:6px 0 0;padding-left:20px;font-size:14px;line-height:1.5}
+@media (max-width:760px){.sbars{grid-template-columns:1fr}.stats b{font-size:19px}}
+
+/* ───── Homepage ───── */
+.home{position:fixed;inset:0;z-index:30;overflow-y:auto;overflow-x:hidden;background:var(--page,#fbfcfd);scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.home[hidden]{display:none!important}
+body.on-home .app{display:none}
+.h-copy h1,.h-sec>h2,.h-final h2,.h-grid h3,.h-steps h3{font-weight:400;letter-spacing:-.02em;margin:0}
+.h-nav{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:20px;padding:12px max(18px,calc((100% - 1160px)/2));background:#fbfcfdd9;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.h-nav .brand{border:0;background:none;display:flex;align-items:center;gap:10px;cursor:pointer;font:inherit;padding:0}
+.h-links{display:flex;gap:22px;margin-left:18px;flex:1}.h-links a{color:var(--ink2);text-decoration:none;font-size:15px}.h-links a:hover{color:var(--ink)}
+.h-cta{display:flex;gap:8px;margin-left:auto}
+.h-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px;align-items:center;padding:56px max(18px,calc((100% - 1160px)/2)) 40px}
+.h-copy h1{font-size:clamp(36px,5.2vw,64px);line-height:1.04;margin:10px 0 18px}
+.h-sub{font-size:18px;line-height:1.55;color:var(--ink2);max-width:560px;margin:0 0 24px}
+.h-btns{display:flex;gap:10px;flex-wrap:wrap}.h-btns .btn{min-height:52px;padding:0 26px}
+.h-copy .linkbtn{display:block;margin-top:14px;font-size:15px}
+.h-trust{list-style:none;display:flex;gap:8px 20px;flex-wrap:wrap;padding:0;margin:22px 0 0;color:var(--ink2);font-size:14px}
+.h-trust li:before{content:"✓ ";color:var(--ok)}
+.h-visual{position:relative;max-width:460px;margin:0 auto;width:100%}
+.h-paper.gal-wrap{border-radius:14px;box-shadow:0 30px 70px #15172b2e;cursor:default;transform:rotate(1.6deg)}
+.h-pill{position:absolute;background:#fff;border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:13px;font-weight:600;box-shadow:0 10px 30px #15172b1f;white-space:nowrap}
+.h-pill.p1{left:-14px;top:10%}.h-pill.p2{right:-10px;top:44%}.h-pill.p3{left:6%;bottom:6%}
+.h-sec{padding:64px max(18px,calc((100% - 1160px)/2))}.h-sec.alt{background:#f4f5f9}
+.h-sec>h2{font-size:clamp(28px,3.6vw,44px);line-height:1.1;margin:8px 0 28px;max-width:760px}
+.h-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.h-grid article{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.h-grid i{font-style:normal;font-size:26px;display:block;margin-bottom:10px}
+.h-grid h3{font-size:20px;margin-bottom:8px}.h-grid p{margin:0;color:var(--ink2);line-height:1.55;font-size:15px}
+.h-steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:0;margin:0}
+.h-steps li{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.h-steps b{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#111;color:#fff;font:500 15px var(--mono);margin-bottom:12px}
+.h-steps h3{font-size:20px;margin-bottom:6px}.h-steps p{margin:0;color:var(--ink2);line-height:1.5}
+.h-center{text-align:center;margin-top:28px}
+.h-strip{display:flex;gap:16px;overflow-x:auto;padding:6px 2px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.h-card{flex:none;width:200px;scroll-snap-align:start;border:0;background:none;padding:0;text-align:left;cursor:pointer;font:inherit}
+.h-card .gal-wrap{display:block;width:200px;border-radius:10px}
+.h-card b{display:block;margin-top:8px;font-weight:600}
+.h-final{text-align:center;padding:70px 18px;background:#111;color:#fff}
+.h-final h2{font-size:clamp(30px,4vw,48px);margin-bottom:10px}.h-final p{color:#c9cbe0;margin:0 0 22px}
+.h-final .btn.primary{background:#fff;color:#111}
+.h-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:20px max(18px,calc((100% - 1160px)/2));color:var(--mute);font-size:13px}
+@media (max-width:860px){.h-hero{grid-template-columns:1fr;padding-top:30px;gap:30px}.h-links{display:none}.h-grid,.h-steps{grid-template-columns:1fr}.h-signup{display:none}.h-visual{max-width:340px}.h-pill.p1{left:-4px}.h-pill.p2{right:-4px}.h-btns .btn{flex:1 1 100%}.h-sec{padding-top:44px;padding-bottom:44px}}
 </style>
 </head>
 <body>
 <div class="app" id="app">
   <header class="topbar">
-    <div class="brand"><span class="logo" aria-hidden="true">F</span><span class="brand-name">Folio</span></div>
+    <button class="brand" data-action="home" aria-label="Folio home" type="button"><span class="logo" aria-hidden="true">F</span><span class="brand-name">Folio</span></button>
     <div class="progress" aria-label="Resume completeness"><div class="progress-bar" id="progressBar"></div><span id="progressText">0%</span></div>
     <div class="top-actions">
       <span class="saved" id="savedState" role="status" aria-live="polite">Saved</span>
@@ -575,11 +651,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
         <button data-action="import">📄 Import an old CV</button>
         <button data-action="linkedin">💼 LinkedIn Studio</button>
         <button data-action="cover">✉️ Cover letter</button>
+        <button data-action="hub">🧭 Job match, tracker &amp; interview</button>
         <button data-action="gallery">Browse filled examples</button>
         <button data-action="export-json">Save backup file (.json)</button>
         <button data-action="import-json">Open backup file…</button>
         <button data-action="copy-text">Copy as plain text</button>
         <button data-action="download-html">Download as web page (.html)</button>
+        <button data-action="home">🏠 Home page</button>
         <button data-action="reset" class="danger">Start over</button>
       </div>
     </div>
@@ -619,9 +697,51 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
   </nav>
 </div>
 
+<div class="home" id="home" hidden>
+  <header class="h-nav">
+    <button class="brand" data-action="home-top" type="button" aria-label="Folio"><span class="logo" aria-hidden="true">F</span><span class="brand-name">Folio</span></button>
+    <nav class="h-links" aria-label="Sections"><a href="#h-features">Features</a><a href="#h-how">How it works</a><a href="#h-designs">Designs</a></nav>
+    <div class="h-cta"><button class="btn ghost h-signup" data-action="home-start" type="button">Sign up</button><button class="btn primary" data-action="home-start" type="button">Get started free</button></div>
+  </header>
+  <section class="h-hero">
+    <div class="h-copy">
+      <p class="eyebrow">AI resume · LinkedIn · job search tools</p>
+      <h1>Your resume, LinkedIn and job search. <span class="px">Done in 10 minutes.</span></h1>
+      <p class="h-sub">Answer a few plain questions and Folio writes a full, polished resume, a matching LinkedIn profile and a cover letter. Then it scores your fit for any job and helps you win the interview.</p>
+      <div class="h-btns"><button class="btn primary big" data-action="home-start" type="button" id="hStart">Get started free</button><button class="btn big" data-action="home-examples" type="button">See filled examples</button></div>
+      <button class="linkbtn" data-action="home-continue" type="button" id="hContinue" hidden>Continue my CV &rarr;</button>
+      <ul class="h-trust"><li>No card, no sign-up wall</li><li>Your data stays on your device</li><li>Works on any phone</li></ul>
+    </div>
+    <div class="h-visual" aria-hidden="true"><div class="h-paper gal-wrap" id="hHero"></div><span class="h-pill p1">ATS-friendly ✓</span><span class="h-pill p2">Job fit 86 · Strong</span><span class="h-pill p3">LinkedIn ready</span></div>
+  </section>
+  <section class="h-sec" id="h-features">
+    <p class="eyebrow">Everything in one place</p><h2>Built for people who have never written a CV</h2>
+    <div class="h-grid">
+      <article><i>⚡</i><h3>Two answers to a full CV</h3><p>Give your name and job. Folio fills the summary, bullets and skills for you, marks what it added, and you untick anything untrue.</p></article>
+      <article><i>🎨</i><h3>Nine modern designs</h3><p>Switch looks in one tap. Click any text to edit it, and zoom to check every detail before you download.</p></article>
+      <article><i>💼</i><h3>LinkedIn Studio</h3><p>Headline, About, experience, skills, banner and posts, all written from your CV so your profile matches.</p></article>
+      <article><i>🧭</i><h3>Job match score</h3><p>Paste a job advert. See your fit out of 100, the keywords you are missing and the one thing to fix first.</p></article>
+      <article><i>📌</i><h3>Application tracker</h3><p>Keep every job in one board, from Saved to Offer, with a next-step tip and follow-up reminders.</p></article>
+      <article><i>🎤</i><h3>Interview practice</h3><p>Real questions from the job and your CV. Type an answer and get a score with tips, plus ready follow-up emails.</p></article>
+    </div>
+  </section>
+  <section class="h-sec alt" id="h-how">
+    <p class="eyebrow">How it works</p><h2>From nothing to a finished application</h2>
+    <ol class="h-steps"><li><b>1</b><h3>Answer a few questions</h3><p>Or upload an old CV. About three minutes.</p></li><li><b>2</b><h3>Review and polish</h3><p>Pick a design, edit directly on the page, check the yellow lines.</p></li><li><b>3</b><h3>Apply with confidence</h3><p>Match it to a job, write the cover letter, practise, download your PDF.</p></li></ol>
+    <div class="h-center"><button class="btn primary big" data-action="home-start" type="button">Start my CV</button></div>
+  </section>
+  <section class="h-sec" id="h-designs">
+    <p class="eyebrow">Designs</p><h2>See how a finished resume looks</h2>
+    <div class="h-strip" id="hStrip"></div>
+    <div class="h-center"><button class="btn big" data-action="home-examples" type="button">Browse all filled examples</button></div>
+  </section>
+  <section class="h-final"><h2>Ready to get hired?</h2><p>It takes about ten minutes, and it is free.</p><button class="btn primary big" data-action="home-start" type="button">Get started free</button></section>
+  <footer class="h-foot"><span>Folio · AI resume builder &amp; LinkedIn profile generator</span><span>Your details are stored only on your device.</span></footer>
+</div>
+
 <div class="modal" id="welcome" hidden>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="wTitle">
-    <p class="eyebrow">Folio · AI Resume Builder</p>
+    <p class="eyebrow">Folio · AI Resume &amp; LinkedIn Builder</p>
     <h1 id="wTitle">A resume built in <span class="px">10 minutes.</span></h1>
     <p>Answer a few plain questions. Your resume builds itself on the right, and you can change the look at any time. Nothing leaves your device.</p>
     <div class="choices">
@@ -1159,11 +1279,15 @@ const A = {
   'copy-text': () => navigator.clipboard.writeText(plainText()).then(() => toast('Copied. Paste anywhere.'), () => toast('Copy was blocked by the browser.')),
   'download-html': () => download((S.personal.name || 'resume').replace(/\W+/g, '-') + '.html', standalone(), 'text/html'),
   reset: () => { if (confirm('Delete everything and start over?')) { S = blank(); step = 0; renderEditor(); renderPreview(); save(); } },
-  'start-blank': () => { $('#welcome').hidden = true; },
+  'start-blank': () => { $('#welcome').hidden = true; enterApp(); },
   'start-quick': () => startVia('quick'),
   'start-ai': () => startVia('interview'),
   'start-import': () => startVia('import'),
   gallery: () => { galRender(); },
+  home: () => showHome(), 'home-top': () => { const el = $('#home'); if (el) el.scrollTop = 0; },
+  'home-start': () => startVia('interview'),
+  'home-examples': () => galRender(),
+  'home-continue': () => enterApp(),
   'start-sample': () => { galRender(); }
 };
 /* ───────── filled examples gallery ───────── */
@@ -1260,19 +1384,37 @@ function onGalClick(e) {
   const id = d.galLook || d.galEdit || d.galOpen;
   if (d.galLook) {
     const had = S.personal.name || S.experience.length;
-    S.template = id; renderPreview(); save(); galClose(); $('#welcome').hidden = true;
+    S.template = id; renderPreview(); save(); galClose(); $('#welcome').hidden = true; enterApp();
     if (!had && window.FolioAI && window.FolioAI.actions.quick) window.FolioAI.actions.quick();
     else toast('Design changed. Your details are unchanged.');
     return;
   }
-  S = Object.assign(PERSONAS[galP].make(), { template: id }); step = 0; galClose(); $('#welcome').hidden = true;
+  S = Object.assign(PERSONAS[galP].make(), { template: id }); step = 0; galClose(); $('#welcome').hidden = true; enterApp();
   renderEditor(); renderPreview(); save(); toast('Example loaded. Replace the details with yours.');
 }
 
+/* ───────── homepage ───────── */
+function pageThumb(st) { return `<article class="page t-${st.template} f-${st.font || 'sans'}" style="--accent:${st.accent};--fs:${st.size || 10.5}pt;width:210mm;min-height:297mm;transform-origin:0 0;position:absolute;left:0;top:0;box-shadow:none">${resumeHTML(st)}</article>`; }
+function scaleWraps(root) { root.querySelectorAll('.gal-wrap').forEach(w => { const p = w.firstElementChild; if (p && w.clientWidth) p.style.transform = `scale(${w.clientWidth / (210 * 3.7795)})`; }); }
+function hasData() { return !!(S.personal.name || S.experience.length); }
+function showHome() {
+  const el = $('#home'); el.hidden = false; document.body.classList.add('on-home'); $('#welcome').hidden = true;
+  $('#hHero').innerHTML = pageThumb(Object.assign(SAMPLE(), { template: 'sidebar' }));
+  const dev = PERSONAS[1].make();
+  $('#hStrip').innerHTML = TEMPLATES.map(t => `<button class="h-card" data-action="home-examples" type="button" aria-label="${t.name} design"><span class="gal-wrap">${pageThumb(Object.assign(PERSONAS[1].make(), { template: t.id }))}</span><b>${t.name}</b></button>`).join('');
+  const c = hasData(); $('#hContinue').hidden = !c;
+  requestAnimationFrame(() => { scaleWraps(el); el.scrollTop = 0; });
+}
+function enterApp() {
+  document.body.classList.remove('on-home'); const el = $('#home'); if (el) el.hidden = true;
+  try { sessionStorage.setItem('folio.entered', '1'); } catch (e) {}
+  requestAnimationFrame(() => { fit(); renderPreview(); });
+}
+window.addEventListener('resize', () => { const el = $('#home'); if (el && !el.hidden) scaleWraps(el); });
 function startVia(name) {
   const f = window.FolioAI && window.FolioAI.actions && window.FolioAI.actions[name];
   if (!f) { toast('Still loading. Please tap again in a moment, or choose "Build it step by step".'); return; }
-  try { f(); $('#welcome').hidden = true; } catch (err) { toast('Something went wrong. Please try again or build it step by step.'); }
+  try { f(); $('#welcome').hidden = true; enterApp(); } catch (err) { toast('Something went wrong. Please try again or build it step by step.'); }
 }
 function onClick(e) {
   const b = e.target.closest('[data-action]');
@@ -1338,8 +1480,9 @@ function init() {
   window.addEventListener('resize', fit);
   window.addEventListener('beforeprint', () => { $('#page').style.zoom = 1; });
   window.addEventListener('afterprint', fit);
-  $('#welcome').hidden = !first;
   renderEditor(); renderPreview();
+  const entered = (() => { try { return sessionStorage.getItem('folio.entered') === '1'; } catch (e) { return false; } })();
+  if (!entered) showHome(); else $('#welcome').hidden = !first;
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 window.Folio = {
@@ -1902,7 +2045,7 @@ const actions = {
       <button class="choice" data-ai="ai-summary"><b>📝 Write my summary</b><span>A strong opening paragraph.</span></button>
       <button class="choice" data-ai="linkedin"><b>💼 Optimise my LinkedIn</b><span>Headline, About, banner, skills, messages.</span></button>
       <button class="choice" data-ai="cover"><b>✉️ Write a cover letter</b><span>Matched to a job advert, from your CV.</span></button>
-      <button class="choice" data-ai="tailor"><b>🎯 Tailor to a job advert</b><span>See missing keywords and fix them.</span></button></div>`);
+      <button class="choice" data-ai="hub"><b>🧭 Job match, tracker &amp; interview</b><span>Score your fit, track jobs, practise answers.</span></button></div>`);
     sh.onclick = e => { const b = e.target.closest('button[data-ai]'); if (!b) return; const a = b.dataset.ai; close(); if (a !== 'close') actions[a]({}); };
   },
   'ai-summary': async () => {
@@ -2376,6 +2519,291 @@ function printLetter(text) {
 
 AI.actions.cover = () => { const c = F().state.cover; if (c && c.letter) { form = Object.assign({}, form, c.form || {}); return result(); } formView(); };
 AI._t.localCover = local; AI._t.normCover = norm; AI._t.unverified = unverified;
+})();
+
+/* Folio Job Hub: job-fit score with keyword gaps, application tracker, interview practice with scored answers,
+   and follow-up message writer. Works fully offline (no AI needed), so it is instant and free. */
+(function () {
+'use strict';
+const AI = window.FolioAI; if (!AI) return;
+const U = AI._ui, F = () => window.Folio, esc = U.esc;
+const $ = (s, r) => (r || document).querySelector(s);
+const STAGES = [['saved', 'Saved'], ['applied', 'Applied'], ['shortlisted', 'Shortlisted'], ['interview', 'Interview'], ['offer', 'Offer'], ['closed', 'Closed']];
+const SK = ('excel,word,powerpoint,sql,python,javascript,typescript,react,node.js,java,php,html,css,aws,azure,docker,git,api,agile,scrum,jira,crm,salesforce,hubspot,seo,google analytics,social media,content creation,copywriting,budgeting,forecasting,reporting,auditing,tax,quickbooks,sap,haccp,iso 9001,iso 22000,gmp,quality assurance,quality control,root cause analysis,lean,six sigma,patient care,triage,medication,infection control,customer service,customer success,negotiation,lead generation,b2b,sales,marketing,project management,stakeholder,communication,leadership,teamwork,problem solving,time management,presentation,research,data analysis,tableau,power bi,figma,ux,photoshop,teaching,lesson planning,classroom management,curriculum,compliance,risk management,procurement,logistics,supply chain,inventory,recruitment,payroll,training,coaching,mentoring,networking,bookkeeping,invoicing,reconciliation,financial reporting,onboarding,safety,documentation,budget,planning,analysis,strategy,operations,customer relationships,account management,cold calling,public speaking,event planning,scheduling,machine learning,testing,debugging,ci/cd,linux,networking,cybersecurity,administration').split(',');
+const STOP = new Set('the and for with that this you your are will have from our their they been who all can has was were not but able work team role must including within across more than into also such other about over what when where which while these those them then than able need needs looking join ensure well strong good great new best like make using used use per etc may might should would could any each both many much very most some own just its it\'s we\'re you\'ll candidate candidates experience experienced required requirements responsibilities responsible skills ability years year plus preferred apply company position job'.split(' '));
+const jobs = () => { const s = F().state; return s.jobs || (s.jobs = []); };
+const now = () => Date.now();
+const ago = t => { const d = Math.floor((now() - t) / 864e5); return d <= 0 ? 'today' : d === 1 ? 'yesterday' : d + ' days ago'; };
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&');
+const countOf = (txt, k) => { const m = txt.match(new RegExp('(^|[^a-z0-9])' + reEsc(k) + '(?![a-z0-9])', 'g')); return m ? m.length : 0; };
+const list = a => a.length <= 1 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+
+/* ───── analysis ───── */
+function keywords(ad) {
+  const t = ' ' + ad.toLowerCase().replace(/[\u2019]/g, "'") + ' ', out = [], seen = new Set();
+  SK.forEach(k => { const n = countOf(t, k); if (n && !seen.has(k)) { seen.add(k); out.push({ k, n: n + 2, skill: true }); } });
+  const freq = {}; (t.match(/[a-z][a-z+#.\/-]{3,}/g) || []).forEach(w => { w = w.replace(/[.\-\/]+$/, ''); if (w.length > 3 && !STOP.has(w) && !seen.has(w)) freq[w] = (freq[w] || 0) + 1; });
+  Object.entries(freq).filter(e => e[1] >= 2).forEach(e => { if (![...seen].some(s => s.includes(e[0]) || e[0].includes(s))) { seen.add(e[0]); out.push({ k: e[0], n: e[1], skill: false }); } });
+  return out.sort((a, b) => (b.skill - a.skill) || (b.n - a.n)).slice(0, 16);
+}
+function cvYears() {
+  let m = 0; const d = new Date(), cur = d.getFullYear() * 12 + d.getMonth();
+  (F().state.experience || []).forEach(e => {
+    const p = x => { const r = /^(\d{4})-(\d{2})/.exec(x || ''); return r ? +r[1] * 12 + (+r[2] - 1) : null; };
+    const a = p(e.start), b = e.current ? cur : p(e.end); if (a != null && b != null && b >= a) m += b - a;
+  });
+  return Math.round(m / 12 * 10) / 10;
+}
+function analyse(title, ad) {
+  const s = F().state, cv = F().text().toLowerCase(), kws = keywords(ad);
+  const stem = k => k.replace(/(ing|ions|ion|ed|es|s)$/, '').slice(0, 6);
+  const have = [], related = [], gap = [];
+  kws.forEach(o => { if (cv.includes(o.k)) have.push(o); else if (stem(o.k).length >= 4 && cv.includes(stem(o.k))) related.push(o); else gap.push(o); });
+  const kwScore = kws.length ? (have.length + related.length * .5) / kws.length * 100 : 0;
+  const sk = kws.filter(o => o.skill), skHave = sk.filter(o => cv.includes(o.k)), skScore = sk.length ? skHave.length / sk.length * 100 : kwScore;
+  const tw = w => (w.toLowerCase().match(/[a-z]{3,}/g) || []).filter(x => !STOP.has(x));
+  const adT = tw(title || ad.split('\n')[0].slice(0, 80)), cvT = new Set(tw([s.personal.title].concat((s.experience || []).map(e => e.role)).join(' ')));
+  const titleM = adT.length ? adT.filter(w => cvT.has(w) || [...cvT].some(c => c.startsWith(w.slice(0, 5)))).length / adT.length : .5;
+  const req = Math.max(0, ...(ad.match(/(\d{1,2})\s*\+?\s*(?:or more\s*)?years?/gi) || []).map(x => +x.match(/\d+/)[0]).filter(n => n <= 15)), have_y = cvYears();
+  const yScore = req ? Math.min(1, have_y / req) : 1, expScore = (titleM * .6 + yScore * .4) * 100;
+  const bl = F().lines((s.experience || []).map(e => e.bullets).join('\n')), impact = bl.length ? Math.min(1, bl.filter(b => /\d/.test(b)).length / bl.length / .4) * 100 : 0;
+  const total = Math.round(kwScore * .45 + skScore * .25 + expScore * .2 + impact * .1);
+  let one;
+  const g0 = gap.find(o => o.skill) || gap[0];
+  if (req && have_y && have_y < req * .7) one = `The advert asks for ${req}+ years and your CV shows about ${have_y}. Make sure every job has clear dates and full bullets.`;
+  else if (g0) one = `Add "${g0.k}" to your skills if you really have it. The advert mentions it ${g0.n > 2 ? g0.n - 2 + ' time' + (g0.n - 2 > 1 ? 's' : '') : 'and it is not on your CV'}.`;
+  else if (related[0]) one = `Use the exact word "${related[0].k}" in your skills or bullets. You describe it, but not in the words the advert uses.`;
+  else if (impact < 40) one = 'Add numbers to your bullets (people, money, time, percentages). Employers look for results.';
+  else one = 'Your CV already matches well. Tailor your summary below and apply.';
+  return { total, label: total >= 80 ? 'Strong fit' : total >= 55 ? 'Partial fit' : 'Poor fit', col: total >= 80 ? 'var(--ok)' : total >= 55 ? 'var(--warn)' : '#c2261a',
+    subs: [['Keywords', kwScore], ['Skills', skScore], ['Experience', expScore], ['Results', impact]].map(x => [x[0], Math.round(x[1])]), have, related, gap, kws, one, req, years: have_y };
+}
+function tailoredSummary(a, title, company) {
+  const s = F().state, base = String(s.summary || '').replace(/\s+/g, ' ').trim(), role = title || (s.personal.title || '');
+  const strong = a.have.filter(o => o.skill).concat(a.have).map(o => o.k).filter((k, i, arr) => arr.indexOf(k) === i).slice(0, 4).map(cap);
+  const first = base.split(/[.!?]\s+/).slice(0, 2).join('. ').replace(/\.$/, '');
+  const open = first || `${s.personal.title || 'Professional'} with ${cvYears() ? Math.round(cvYears()) + ' years of' : 'hands-on'} experience`;
+  return `${open}.${strong.length ? ' Strong in ' + list(strong) + ', which are central to this role.' : ''} Keen to bring this to the ${role || 'role'}${company ? ' at ' + company : ''}.`;
+}
+
+/* ───── interview questions + answer scoring ───── */
+const GENERIC = [
+  ['Screening', 'Tell me about yourself and why you are applying for this role.'],
+  ['Screening', 'What do you know about our company, and why do you want to work here?'],
+  ['Behavioural', 'Tell me about a time you faced a difficult problem at work. What did you do and what was the result?'],
+  ['Behavioural', 'Describe a time you disagreed with a colleague or manager. How did you handle it?'],
+  ['Behavioural', 'Give an example of when you worked under pressure to meet a deadline.'],
+  ['Behavioural', 'Tell me about a mistake you made at work and what you learned from it.'],
+  ['Motivation', 'Where do you see yourself in three years?'],
+  ['Motivation', 'What salary are you expecting, and how did you arrive at that figure?']
+];
+function questions(ctx) {
+  const s = F().state, role = ctx.role || s.personal.title || 'this role', q = [];
+  q.push(['Screening', `Tell me about yourself and why you are a good fit for the ${role} role${ctx.company ? ' at ' + ctx.company : ''}.`]);
+  const a = ctx.ad ? analyse(ctx.role, ctx.ad) : null;
+  if (a) {
+    a.have.slice(0, 3).forEach(o => q.push(['Role skills', `The advert highlights ${o.k}. Give me an example of your work involving ${o.k} and the result you got.`]));
+    a.gap.slice(0, 2).forEach(o => q.push(['Gap question', `We need someone strong in ${o.k}. How would you handle that, given your background?`]));
+  } else (s.skills || []).slice(0, 3).forEach(k => q.push(['Role skills', `Give me an example of your work involving ${k} and the result you got.`]));
+  const bl = F().lines((s.experience || []).map(e => e.bullets).join('\n')).filter(b => b.length > 30);
+  bl.slice(0, 2).forEach(b => q.push(['About your CV', `Your CV says: "${b.replace(/\.$/, '')}". Walk me through how you did that.`]));
+  GENERIC.slice(2).forEach(g => q.push(g));
+  return q.slice(0, 12);
+}
+const FILLER = /\b(um+|uh+|you know|basically|actually|kind of|sort of|like i said|i guess|maybe i|stuff|things like that)\b/gi;
+function scoreAnswer(text, q) {
+  const t = text.trim(), words = (t.match(/\b[\w'%-]+\b/g) || []).length, low = t.toLowerCase();
+  const star = [/\b(when|during|at the time|situation|challenge|problem|last year|in my previous)\b/, /\b(my role|i was responsible|my job|goal|needed to|had to|task|asked to)\b/, /\bi\s+(?:[a-z]{3,}ed|led|ran|built|made|set up|took|wrote|won|taught|chose|began|did|found|kept|sent|held|met|gave|got|drove|grew|cut|sold|led)\b/, /\b(result|resulted|as a result|increased|reduced|improved|saved|achieved|won|grew|so that|learned|which led)\b/].map(r => r.test(low));
+  const metrics = /\d/.test(t), me = (low.match(/\bi\b/g) || []).length, we = (low.match(/\bwe\b/g) || []).length, fill = (t.match(FILLER) || []).length;
+  let sc = Math.min(30, words / 50 * 30) - (words > 220 ? 8 : 0) + star.filter(Boolean).length * 9 + (metrics ? 14 : 0) + (me >= 3 && we <= me ? 10 : me ? 5 : 0) + Math.max(0, 10 - fill * 4);
+  sc = Math.max(5, Math.min(100, Math.round(sc))); if (words < 15) sc = Math.min(sc, 25);
+  const fb = [];
+  if (words < 40) fb.push('Too short. Aim for 60 to 150 words, about a minute spoken.'); else if (words > 200) fb.push('A bit long. Trim to the key points so they stay with you.');
+  else fb.push('Good length.');
+  if (!star[0]) fb.push('Set the scene first: where and when did this happen?');
+  if (!star[1]) fb.push('Say what your job or goal was in that situation.');
+  if (!star[2]) fb.push('Describe what YOU did, using "I" and strong verbs.');
+  if (!star[3]) fb.push('End with the result. What changed because of you?');
+  if (!metrics) fb.push('Add one number (people, time, money, percent). It makes the answer believable.');
+  if (we > me * 1.5 && we > 2) fb.push('You say "we" a lot. Be clear about your own part.');
+  if (fill) fb.push(`Cut filler words (${[...new Set((t.match(FILLER) || []).map(x => x.toLowerCase()))].join(', ')}).`);
+  if (sc >= 75) fb.unshift('Strong answer. Keep it, and practise saying it out loud.');
+  return { sc, label: sc >= 75 ? 'Strong' : sc >= 50 ? 'Okay' : 'Needs work', fb };
+}
+function starter(q) {
+  const bl = F().lines((F().state.experience || []).map(e => e.bullets).join('\n')), w = (q.toLowerCase().match(/[a-z]{4,}/g) || []).filter(x => !STOP.has(x));
+  let best = null, bs = 0; bl.forEach(b => { const n = w.filter(x => b.toLowerCase().includes(x)).length; if (n > bs) { bs = n; best = b; } });
+  return best || bl[0] || '';
+}
+
+/* ───── follow-up messages ───── */
+const MSG = {
+  applied: ['Follow up after applying', f => [`Following up on my application: ${f.role}`, `Hello ${f.name},\n\nI applied for the ${f.role} position${f.company ? ' at ' + f.company : ''} on [date] and wanted to confirm that my application reached you.\n\nI am very interested in the role. ${f.skills ? 'My background in ' + f.skills + ' fits what you are looking for, and ' : ''}I would be glad to share more about my experience.\n\nThank you for your time.\n\nKind regards,\n${f.me}`]],
+  thanks: ['Thank you after an interview', f => [`Thank you, ${f.role} interview`, `Hello ${f.name},\n\nThank you for taking the time to speak with me about the ${f.role} role${f.company ? ' at ' + f.company : ''}. I enjoyed learning more about [something specific from the interview].\n\nOur conversation made me more excited about the job. I believe my experience${f.skills ? ' in ' + f.skills : ''} would help the team, and I would be happy to answer any further questions.\n\nThank you again.\n\nKind regards,\n${f.me}`]],
+  checkin: ['Check in when you have heard nothing', f => [`Checking in: ${f.role}`, `Hello ${f.name},\n\nI hope you are well. I wanted to check in on the ${f.role} position${f.company ? ' at ' + f.company : ''}. I remain very interested and would appreciate any update on the timeline.\n\nIf you need anything more from me, I am happy to send it.\n\nThank you,\n${f.me}`]],
+  referral: ['Ask for a referral', f => [`Quick question about ${f.company || 'your company'}`, `Hi ${f.name},\n\nI hope you are doing well. I am applying for the ${f.role} role${f.company ? ' at ' + f.company : ''} and noticed you work there. Would you be open to referring me, or sharing what the team looks for?\n\nA short summary: ${f.skills ? 'I work in ' + f.skills + '. ' : ''}I can send my CV and a few lines you can forward.\n\nThank you for considering it.\n\n${f.me}`]],
+  info: ['Request an informational chat', f => [`Could I ask you a few questions about your work?`, `Hi ${f.name},\n\nI admire your career in [field] and am exploring ${f.role ? f.role + ' roles' : 'opportunities in this area'}. Could we speak for 15 minutes in the next few weeks? I would love to hear how you got started and what you would do differently.\n\nI know you are busy, so a few written answers would also help.\n\nThank you,\n${f.me}`]],
+  accept: ['Accept a job offer', f => [`Accepting the ${f.role} offer`, `Hello ${f.name},\n\nThank you for the offer for the ${f.role} position${f.company ? ' at ' + f.company : ''}. I am delighted to accept.\n\nPlease let me know the next steps, my start date and any documents you need from me.\n\nI look forward to joining the team.\n\nKind regards,\n${f.me}`]],
+  negotiate: ['Negotiate an offer', f => [`Thank you for the ${f.role} offer`, `Hello ${f.name},\n\nThank you for offering me the ${f.role} role${f.company ? ' at ' + f.company : ''}. I am excited about it.\n\nBased on my experience${f.skills ? ' in ' + f.skills : ''} and the scope of the role, I was hoping for a salary of [amount]. Is there flexibility to discuss this?\n\nI am keen to find a way to make this work.\n\nKind regards,\n${f.me}`]],
+  decline: ['Decline an offer politely', f => [`Re: ${f.role} offer`, `Hello ${f.name},\n\nThank you for offering me the ${f.role} position${f.company ? ' at ' + f.company : ''}, and for the time your team spent with me. After careful thought, I have decided to decline.\n\nI enjoyed meeting everyone and would be glad to stay in touch.\n\nKind regards,\n${f.me}`]]
+};
+
+/* ───── interface ───── */
+const H = { tab: 'match', M: { title: '', company: '', ad: '', res: null, added: {}, sum: '' }, T: { stage: 'saved', adding: false, open: null, del: null, f: { role: '', company: '', url: '', stage: 'saved', ad: '' } },
+  I: { ctx: 'cv', qs: null, ans: {}, res: {} }, G: { type: 'applied', job: '', f: { name: '', company: '', role: '' } } };
+const TABS = [['match', 'Job match'], ['tracker', 'Tracker'], ['interview', 'Interview'], ['msgs', 'Messages']];
+const field = (label, attrs, val, tag) => `<div class="field"><label>${label}</label>${tag === 'ta' ? `<textarea ${attrs}>${esc(val)}</textarea>` : `<input type="text" ${attrs} value="${esc(val)}">`}</div>`;
+const bar = (n, v) => `<div class="sbar"><span>${n}</span><i><b style="width:${v}%"></b></i><em>${v}</em></div>`;
+function ctxList() {
+  const L = [{ id: 'cv', label: 'My CV only', role: F().state.personal.title, ad: '', company: '' }];
+  if (H.M.ad) L.push({ id: 'm', label: (H.M.title || 'Job from the Match tab') + (H.M.company ? ' · ' + H.M.company : ''), role: H.M.title, ad: H.M.ad, company: H.M.company });
+  jobs().forEach(j => L.push({ id: j.id, label: j.role + (j.company ? ' · ' + j.company : ''), role: j.role, ad: j.ad || '', company: j.company }));
+  return L;
+}
+function coach(j) {
+  const d = Math.floor((now() - ((j.hist || []).slice(-1)[0] || { t: j.added }).t) / 864e5);
+  return { saved: 'Next: check your fit, tailor your CV, then apply.', applied: d >= 5 ? `Applied ${d} days ago. Time to send a polite follow-up.` : 'Applied. Follow up in about a week if you hear nothing.',
+    shortlisted: 'You are shortlisted. Practise the interview questions now.', interview: 'After the interview, send a thank-you within 24 hours.', offer: 'Congratulations. Compare the offer, then accept, negotiate or decline politely.', closed: 'Closed. Ask for feedback, learn, and move on to the next one.' }[j.stage];
+}
+function pane() {
+  const s = F().state, M = H.M, T = H.T;
+  if (H.tab === 'match') {
+    const r = M.res;
+    let h = `<p class="lead">Paste a job advert. We score how well your CV fits it, show the keywords you are missing and help you fix them. Nothing is sent anywhere.</p>
+      <div class="grid2">${field('Job title', 'data-h="mt" placeholder="e.g. Sales Executive"', M.title)}${field('Company (optional)', 'data-h="mc" placeholder="e.g. Bright Foods"', M.company)}</div>
+      ${field('Job advert', 'data-h="ma" rows="7" placeholder="Paste the full job description here"', M.ad, 'ta')}<p class="hint bad" id="hErr"></p>
+      <div class="btn-row"><button class="btn primary big" data-h-go="match">${r ? 'Check again' : 'Check my fit'}</button></div>`;
+    if (r) {
+      const chips = (arr, mode) => arr.map(o => mode === 'have' ? `<span class="chip">${esc(o.k)}</span>` : (M.added[o.k] ? `<span class="chip on">✓ ${esc(o.k)}</span>` : `<button class="chip sug" data-h-add="${esc(o.k)}">+ ${esc(o.k)}</button>`)).join('') || '<span class="hint">None</span>';
+      h += `<hr class="sep"><div class="score"><div class="ring" style="--p:${r.total};--c:${r.col}"><i>${r.total}</i></div><div><b>${r.label}</b><div class="hint">Out of 100. Employers tend to interview from about 80.</div></div></div>
+        <div class="sbars">${r.subs.map(x => bar(x[0], x[1])).join('')}</div>
+        <div class="tip"><b>The one thing to fix first</b><br>${esc(r.one)}</div>
+        <p class="lbl">Already on your CV</p><div class="chips">${chips(r.have, 'have')}</div>
+        ${r.related.length ? `<p class="lbl" style="margin-top:14px">You probably have these. Use the exact words</p><div class="chips">${chips(r.related)}</div>` : ''}
+        ${r.gap.length ? `<p class="lbl" style="margin-top:14px">Not found on your CV. Only add what is true for you</p><div class="chips">${chips(r.gap)}</div>` : ''}
+        ${M.sum ? `<div class="cmp"><div class="new"><span class="lbl">Tailored summary</span><textarea data-h="sumtxt" rows="4">${esc(M.sum)}</textarea></div></div>` : ''}
+        <div class="btn-row wrap">${M.sum ? '<button class="btn primary" data-h-usesum="1">Use this summary</button>' : '<button class="btn" data-h-sum="1">✍️ Write a tailored summary</button>'}<button class="btn" data-h-save="1">📌 Save to tracker</button><button class="btn" data-h-iv="m">🎤 Practise this interview</button><button class="btn" data-h-cover="1">✉️ Cover letter</button></div>`;
+    }
+    return h;
+  }
+  if (H.tab === 'tracker') {
+    const js = jobs(), n = st => js.filter(j => j.stage === st).length, applied = js.filter(j => j.stage !== 'saved').length, resp = js.filter(j => ['shortlisted', 'interview', 'offer'].includes(j.stage)).length;
+    let h = `<p class="lead">Keep every application in one place. Move each job along as you go. Saved on this device.</p>
+      <div class="stats"><div><b>${js.length}</b><span>Jobs</span></div><div><b>${applied}</b><span>Applied</span></div><div><b>${resp}</b><span>Replies</span></div><div><b>${applied ? Math.round(resp / applied * 100) : 0}%</b><span>Reply rate</span></div></div>
+      <div class="chips stagechips" role="tablist">${STAGES.map(x => `<button class="chip ${T.stage === x[0] ? 'on' : ''}" role="tab" aria-selected="${T.stage === x[0]}" data-h-stage="${x[0]}">${x[1]} <b>${n(x[0])}</b></button>`).join('')}</div>`;
+    if (T.adding) {
+      const f = T.f;
+      h += `<div class="jcard addj"><b>Add a job</b><div class="grid2">${field('Job title', 'data-h-nf="role" placeholder="e.g. Sales Executive"', f.role)}${field('Company', 'data-h-nf="company" placeholder="e.g. Bright Foods"', f.company)}</div>
+        ${field('Link (optional)', 'data-h-nf="url" placeholder="https://..."', f.url)}
+        <div class="field"><label>Stage</label><select data-h-nf="stage">${STAGES.map(x => `<option value="${x[0]}" ${f.stage === x[0] ? 'selected' : ''}>${x[1]}</option>`).join('')}</select></div>
+        ${field('Job advert (optional, gives you a fit score)', 'data-h-nf="ad" rows="4" placeholder="Paste the job description"', f.ad, 'ta')}<p class="hint bad" id="hErr"></p>
+        <div class="btn-row"><button class="btn primary" data-h-addjob="1">Add job</button><button class="btn" data-h-canceladd="1">Cancel</button></div></div>`;
+    } else h += `<div class="btn-row"><button class="btn primary" data-h-newjob="1">+ Add a job</button></div>`;
+    const cur = js.filter(j => j.stage === T.stage);
+    h += cur.length ? cur.map(j => {
+      const o = T.open === j.id;
+      return `<div class="jcard"><div class="jtop"><div><b>${esc(j.role || 'Untitled job')}</b><div class="hint">${esc(j.company || 'No company')} · added ${ago(j.added)}</div></div>${j.score != null ? `<span class="badge" style="--c:${j.score >= 80 ? 'var(--ok)' : j.score >= 55 ? 'var(--warn)' : '#c2261a'}">${j.score}</span>` : ''}</div>
+        <p class="coach">💡 ${esc(coach(j))}</p>
+        <div class="jrow"><select data-h-move="${j.id}" aria-label="Move to stage">${STAGES.map(x => `<option value="${x[0]}" ${j.stage === x[0] ? 'selected' : ''}>${x[1]}</option>`).join('')}</select>
+        <button class="btn small" data-h-open="${j.id}">${o ? 'Hide' : 'Details'}</button><button class="btn small" data-h-ivjob="${j.id}">Interview</button><button class="btn small" data-h-msgjob="${j.id}">Message</button></div>
+        ${o ? `<div class="jdet">${j.url ? `<a class="btn small" href="${esc(j.url)}" target="_blank" rel="noopener">Open job link ↗</a>` : ''}<div class="field"><label>Follow-up date</label><input type="date" data-h-fu="${j.id}" value="${esc(j.fu || '')}"></div>
+          <div class="field"><label>Notes</label><textarea rows="3" data-h-note="${j.id}" placeholder="Contacts, salary, questions asked...">${esc(j.notes || '')}</textarea></div>
+          ${j.ad ? `<button class="btn small" data-h-rescore="${j.id}">Re-check fit with my latest CV</button>` : ''}
+          <button class="btn small danger" data-h-del="${j.id}">${T.del === j.id ? 'Tap again to delete' : 'Delete job'}</button></div>` : ''}</div>`;
+    }).join('') : `<p class="hint empty">Nothing in "${STAGES.find(x => x[0] === T.stage)[1]}" yet.</p>`;
+    return h;
+  }
+  if (H.tab === 'interview') {
+    const L = ctxList(), I = H.I; if (!L.find(x => x.id === I.ctx)) I.ctx = 'cv';
+    const c = L.find(x => x.id === I.ctx); if (!I.qs) I.qs = questions(c);
+    const done = Object.keys(I.res).length, avg = done ? Math.round(Object.values(I.res).reduce((a, b) => a + b.sc, 0) / done) : 0;
+    return `<p class="lead">Practise real questions for a job. Type your answer, get a score and tips. Aim for the STAR shape: Situation, Task, Action, Result.</p>
+      <div class="field"><label>Practise for</label><select data-h-ctx="1">${L.map(x => `<option value="${esc(x.id)}" ${I.ctx === x.id ? 'selected' : ''}>${esc(x.label)}</option>`).join('')}</select></div>
+      <p class="hint">Practised ${done} of ${I.qs.length}${done ? ` · average score ${avg}` : ''}</p>` + I.qs.map((q, i) => {
+      const r = I.res[i];
+      return `<div class="qcard"><span class="lbl">${q[0]}</span><p class="q">${esc(q[1])}</p><textarea rows="4" data-h-ans="${i}" placeholder="Type your answer as you would say it">${esc(I.ans[i] || '')}</textarea>
+        <div class="btn-row"><button class="btn small primary" data-h-score="${i}">Score my answer</button><button class="btn small" data-h-hint="${i}">Help me start</button></div>
+        ${I.hint === i ? `<div class="tip"><b>STAR starter</b><br>Situation: where and when?<br>Task: what was your goal?<br>Action: ${starter(q[1]) ? 'e.g. "' + esc(starter(q[1]).replace(/\.$/, '')) + '"' : 'what did you do?'}<br>Result: add a number.</div>` : ''}
+        ${r ? `<div class="res"><div class="rhead"><b style="color:${r.sc >= 75 ? 'var(--ok)' : r.sc >= 50 ? 'var(--warn)' : '#c2261a'}">${r.sc}/100 · ${r.label}</b></div><ul>${r.fb.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>` : ''}</div>`;
+    }).join('') + `<div class="btn-row"><button class="btn" data-h-newqs="1">↻ New set of questions</button></div>`;
+  }
+  const G = H.G, js = jobs(), f = G.f, m = MSG[G.type][1]({ name: f.name || '[Name]', company: f.company, role: f.role || (s.personal.title || '[role]'), me: s.personal.name || '[Your name]', skills: list((s.skills || []).slice(0, 3)) }), subj = m[0], body = m[1];
+  return `<p class="lead">Ready-to-send emails and LinkedIn messages for every stage. Fill in a name and edit before you send.</p>
+    <div class="field"><label>Message type</label><select data-h-mtype="1">${Object.entries(MSG).map(x => `<option value="${x[0]}" ${G.type === x[0] ? 'selected' : ''}>${x[1][0]}</option>`).join('')}</select></div>
+    ${js.length ? `<div class="field"><label>Fill from a tracked job</label><select data-h-mjob="1"><option value="">Choose a job</option>${js.map(j => `<option value="${j.id}" ${G.job === j.id ? 'selected' : ''}>${esc(j.role)} · ${esc(j.company)}</option>`).join('')}</select></div>` : ''}
+    <div class="grid2">${field('Their name', 'data-h-mf="name" placeholder="e.g. Mrs Adeyemi"', f.name)}${field('Company', 'data-h-mf="company"', f.company)}</div>${field('Role', 'data-h-mf="role"', f.role)}
+    <span class="lbl">Subject</span><div class="cb"><input type="text" id="hSubj" value="${esc(subj)}" aria-label="Subject"><div class="cb-row"><span></span><button class="btn small" data-h-copy="subj">Copy</button></div></div>
+    <span class="lbl" style="margin-top:12px">Message</span><div class="cb"><textarea id="hBody" rows="11" aria-label="Message">${esc(body)}</textarea><div class="cb-row"><span></span><button class="btn small" data-h-copy="body">Copy</button></div></div><p class="hint">Replace anything in [brackets] before sending.</p>`;
+}
+function render() {
+  const old = document.querySelector('#aiModal .sheet'), y = old ? old.scrollTop : 0;
+  const sh = U.open(`<div class="iv-top"><p class="eyebrow" style="margin:0">🧭 Job Hub</p><button class="icon-btn" data-h-x="1" aria-label="Close">✕</button></div>
+    <div class="litabs" role="tablist">${TABS.map(t => `<button role="tab" data-h-tab="${t[0]}" aria-selected="${H.tab === t[0]}">${t[1]}</button>`).join('')}</div><div class="hubpane">${pane()}</div>`);
+  sh.classList.add('hub'); sh.scrollTop = y;
+  sh.onclick = onClick; sh.oninput = onInput; sh.onchange = onChange;
+}
+function updMsg() {
+  const s = F().state, f = H.G.f, m = MSG[H.G.type][1]({ name: f.name || '[Name]', company: f.company, role: f.role || (s.personal.title || '[role]'), me: s.personal.name || '[Your name]', skills: list((s.skills || []).slice(0, 3)) });
+  const a = $('#hSubj'), b = $('#hBody'); if (a) a.value = m[0]; if (b) b.value = m[1];
+}
+function onInput(e) {
+  const t = e.target, d = t.dataset, M = H.M;
+  if (d.h === 'mt') M.title = t.value; else if (d.h === 'mc') M.company = t.value; else if (d.h === 'ma') M.ad = t.value; else if (d.h === 'sumtxt') M.sum = t.value;
+  else if (d.hNf) H.T.f[d.hNf] = t.value;
+  else if (d.hNote) { const j = jobs().find(x => x.id === d.hNote); if (j) { j.notes = t.value; F().save(); } }
+  else if (d.hAns != null) H.I.ans[d.hAns] = t.value;
+  else if (d.hMf) { H.G.f[d.hMf] = t.value; updMsg(); }
+}
+function onChange(e) {
+  const t = e.target, d = t.dataset;
+  if (d.hNf === 'stage') H.T.f.stage = t.value;
+  else if (d.hMove) { const j = jobs().find(x => x.id === d.hMove); if (j) { j.stage = t.value; (j.hist = j.hist || []).push({ s: t.value, t: now() }); F().save(); H.T.stage = t.value; render(); } }
+  else if (d.hFu) { const j = jobs().find(x => x.id === d.hFu); if (j) { j.fu = t.value; F().save(); } }
+  else if (d.hCtx) { H.I.ctx = t.value; H.I.qs = null; H.I.ans = {}; H.I.res = {}; H.I.hint = null; render(); }
+  else if (d.hMtype) { H.G.type = t.value; render(); }
+  else if (d.hMjob) { const j = jobs().find(x => x.id === t.value); H.G.job = t.value; if (j) { H.G.f.company = j.company; H.G.f.role = j.role; } render(); }
+}
+function copyText(txt) { (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => F().toast('Copied.'), () => { const a = document.createElement('textarea'); a.value = txt; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); F().toast('Copied.'); } catch (e) { F().toast('Select the text and copy it.'); } a.remove(); }); }
+function onClick(e) {
+  const b = e.target.closest('button,[data-h-x]'); if (!b) return; const d = b.dataset, M = H.M, T = H.T, s = F().state;
+  if (d.hX) return U.close();
+  if (d.hTab) { H.tab = d.hTab; return render(); }
+  if (d.hGo === 'match') {
+    if (M.ad.trim().length < 60) { const er = $('#hErr'); if (er) er.textContent = 'Paste the full job advert (at least a few sentences).'; return; }
+    M.res = analyse(M.title, M.ad); M.added = {}; M.sum = ''; return render();
+  }
+  if (d.hAdd) { const k = cap(d.hAdd); F().patch(st => { if (!st.skills.some(x => x.toLowerCase() === k.toLowerCase())) { st.skills.push(k); st.aiAdded = (st.aiAdded || []).concat(k); } }); M.added[d.hAdd] = 1; return render(); }
+  if (d.hSum) { M.sum = tailoredSummary(M.res, M.title, M.company); return render(); }
+  if (d.hUsesum) { const v = M.sum.trim(); F().patch(st => { st.summary = v; st.aiAdded = (st.aiAdded || []).concat(v); }); F().toast('Summary updated and highlighted yellow. Check it is true.'); return; }
+  if (d.hSave) { jobs().push({ id: F().uid(), role: M.title || 'Job', company: M.company, url: '', stage: 'saved', notes: '', ad: M.ad, score: M.res ? M.res.total : null, added: now(), fu: '', hist: [{ s: 'saved', t: now() }] }); F().save(); F().toast('Saved to your tracker.'); H.tab = 'tracker'; T.stage = 'saved'; return render(); }
+  if (d.hIv === 'm') { H.I = { ctx: 'm', qs: null, ans: {}, res: {} }; H.tab = 'interview'; return render(); }
+  if (d.hCover) { U.close(); return AI.actions.cover && AI.actions.cover({}); }
+  if (d.hStage) { T.stage = d.hStage; return render(); }
+  if (d.hNewjob) { T.adding = true; return render(); }
+  if (d.hCanceladd) { T.adding = false; return render(); }
+  if (d.hAddjob) {
+    const f = T.f; if (!f.role.trim() && !f.company.trim()) { const er = $('#hErr'); if (er) er.textContent = 'Add a job title or a company.'; return; }
+    const sc = f.ad.trim().length >= 60 ? analyse(f.role, f.ad).total : null;
+    jobs().push({ id: F().uid(), role: f.role.trim(), company: f.company.trim(), url: /^https?:\/\//i.test(f.url.trim()) ? f.url.trim() : '', stage: f.stage, notes: '', ad: f.ad.trim(), score: sc, added: now(), fu: '', hist: [{ s: f.stage, t: now() }] });
+    F().save(); T.stage = f.stage; T.adding = false; T.f = { role: '', company: '', url: '', stage: 'saved', ad: '' }; return render();
+  }
+  if (d.hOpen) { T.open = T.open === d.hOpen ? null : d.hOpen; T.del = null; return render(); }
+  if (d.hDel) { if (T.del === d.hDel) { const a = jobs(); a.splice(a.findIndex(x => x.id === d.hDel), 1); F().save(); T.del = null; T.open = null; } else T.del = d.hDel; return render(); }
+  if (d.hRescore) { const j = jobs().find(x => x.id === d.hRescore); if (j) { j.score = analyse(j.role, j.ad).total; F().save(); F().toast('Fit score updated: ' + j.score); render(); } return; }
+  if (d.hIvjob) { H.I = { ctx: d.hIvjob, qs: null, ans: {}, res: {} }; H.tab = 'interview'; return render(); }
+  if (d.hMsgjob) { const j = jobs().find(x => x.id === d.hMsgjob); H.G.job = d.hMsgjob; if (j) { H.G.f.company = j.company; H.G.f.role = j.role; H.G.type = j.stage === 'interview' ? 'thanks' : j.stage === 'offer' ? 'accept' : j.stage === 'closed' ? 'checkin' : 'applied'; } H.tab = 'msgs'; return render(); }
+  if (d.hScore != null) { const i = +d.hScore, txt = (H.I.ans[i] || '').trim(); if (txt.length < 5) return F().toast('Type your answer first.'); H.I.res[i] = scoreAnswer(txt, H.I.qs[i][1]); H.I.hint = null; return render(); }
+  if (d.hHint != null) { H.I.hint = H.I.hint === +d.hHint ? null : +d.hHint; return render(); }
+  if (d.hNewqs) { const L = ctxList(), c = L.find(x => x.id === H.I.ctx) || L[0], all = questions(c), rot = all.slice(1).sort(() => Math.random() - .5); H.I.qs = [all[0]].concat(rot).slice(0, all.length); H.I.ans = {}; H.I.res = {}; H.I.hint = null; return render(); }
+  if (d.hCopy) { const v = d.hCopy === 'subj' ? $('#hSubj').value : $('#hBody').value; return copyText(v); }
+}
+function openHub(tab) { H.tab = tab || 'match'; H.I.qs = null; render(); }
+AI.actions.hub = () => openHub('match');
+AI.actions.jobs = () => openHub('tracker');
+AI.actions.tailor = () => openHub('match');
+AI.actions.interviewprep = () => openHub('interview');
+AI._t = Object.assign(AI._t || {}, { analyse, scoreAnswer, keywords, questions });
 })();
 </script>
 </body>
