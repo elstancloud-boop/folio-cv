@@ -545,6 +545,19 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
 }
 @media (max-width:420px){.choice{padding:16px}.choice b{font-size:16.5px}}
 @media (max-width:980px){#aiBar{display:flex!important;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;font-size:13px;text-align:left;line-height:1.3}#aiBar[hidden]{display:none!important}#aiBar button{flex:none;min-height:36px;padding:6px 12px;font-size:13px}}
+
+.modal-card.gal{width:min(920px,100%);max-width:920px}
+.gal-chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;-webkit-overflow-scrolling:touch}
+.gal-chips .chip{flex:none;min-height:40px;padding:8px 16px;border-radius:999px;border:1px solid var(--border,rgba(112,115,147,.2));background:#fff;font:inherit;cursor:pointer}
+.gal-chips .chip.on{background:#111;color:#fff;border-color:#111}
+.gal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:6px}
+.gal-card{display:flex;flex-direction:column;gap:4px;min-width:0}
+.gal-card small{color:var(--ink2,#555);line-height:1.35}
+.gal-wrap{position:relative;width:100%;aspect-ratio:210/297;overflow:hidden;background:#fff;border:1px solid rgba(112,115,147,.25);border-radius:10px;cursor:pointer;box-shadow:0 6px 20px #15172b14;pointer-events:auto}
+.gal-wrap .page{pointer-events:none}
+.gal-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.gal-btns .btn{flex:1 1 auto;min-height:44px}
+@media (max-width:760px){.gal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gal-btns{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -562,7 +575,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
         <button data-action="import">📄 Import an old CV</button>
         <button data-action="linkedin">💼 LinkedIn Studio</button>
         <button data-action="cover">✉️ Cover letter</button>
-        <button data-action="load-sample">Load example resume</button>
+        <button data-action="gallery">Browse filled examples</button>
         <button data-action="export-json">Save backup file (.json)</button>
         <button data-action="import-json">Open backup file…</button>
         <button data-action="copy-text">Copy as plain text</button>
@@ -617,7 +630,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
       <button class="choice" data-action="start-import"><b>📄 I have an old CV</b><span>Upload or paste it and we modernise it.</span></button>
       <button class="choice" data-action="start-blank"><b>✏️ Build it step by step</b><span>Fill in each section yourself.</span></button>
     </div>
-    <button class="linkbtn" data-action="start-sample">See an example first</button>
+    <button class="linkbtn" data-action="start-sample">Browse filled examples &rarr;</button>
   </div>
 </div>
 
@@ -1140,18 +1153,127 @@ const A = {
   'sec-vis': d => mutate(() => { const h = S.hidden, i = h.indexOf(d.k); i < 0 ? h.push(d.k) : h.splice(i, 1); }),
   photo: () => $('#filePhoto').click(),
   'photo-del': () => mutate(() => S.photo = ''),
-  'load-sample': () => { if (!S.personal.name || confirm('Replace what you have with the example?')) { S = SAMPLE(); step = 0; renderEditor(); renderPreview(); save(); toast('Example loaded. Replace it with your details.'); } },
+  'load-sample': () => { galRender(); return; if (false) { S = SAMPLE(); step = 0; renderEditor(); renderPreview(); save(); toast('Example loaded. Replace it with your details.'); } },
   'export-json': () => download('resume-backup.json', JSON.stringify(S, null, 2), 'application/json'),
   'import-json': () => $('#fileJson').click(),
   'copy-text': () => navigator.clipboard.writeText(plainText()).then(() => toast('Copied. Paste anywhere.'), () => toast('Copy was blocked by the browser.')),
   'download-html': () => download((S.personal.name || 'resume').replace(/\W+/g, '-') + '.html', standalone(), 'text/html'),
   reset: () => { if (confirm('Delete everything and start over?')) { S = blank(); step = 0; renderEditor(); renderPreview(); save(); } },
   'start-blank': () => { $('#welcome').hidden = true; },
-  'start-quick': () => { $('#welcome').hidden = true; window.FolioAI && window.FolioAI.actions.quick(); },
-  'start-ai': () => { $('#welcome').hidden = true; window.FolioAI && window.FolioAI.actions.interview(); },
-  'start-import': () => { $('#welcome').hidden = true; window.FolioAI && window.FolioAI.actions.import(); },
-  'start-sample': () => { S = SAMPLE(); step = 0; $('#welcome').hidden = true; renderEditor(); renderPreview(); save(); }
+  'start-quick': () => startVia('quick'),
+  'start-ai': () => startVia('interview'),
+  'start-import': () => startVia('import'),
+  gallery: () => { galRender(); },
+  'start-sample': () => { galRender(); }
 };
+/* ───────── filled examples gallery ───────── */
+const PERSONAS = [
+  { key: 'Quality', make: () => SAMPLE() },
+  { key: 'Developer', make: () => Object.assign(blank(), {
+    accent: '#0f6fde',
+    personal: { name: 'Daniel Mensah', title: 'Software Developer', email: 'daniel.mensah@example.com', phone: '+233 24 555 0142', location: 'Accra, Ghana', website: 'danielmensah.dev', linkedin: 'linkedin.com/in/danielmensah' },
+    summary: 'Full-stack developer with 5 years of experience building web apps for fintech and logistics teams. Shipped a payments dashboard used by 12,000 merchants and cut page load time by 45%. Comfortable across React, Node.js and cloud deployment, and happiest working closely with designers and product owners.',
+    experience: [
+      { id: uid(), role: 'Software Developer', company: 'PayBridge', location: 'Accra', start: '2022-02', end: '', current: true, bullets: 'Built a merchant dashboard in React and Node.js used by 12,000 businesses\nCut average page load time by 45% by splitting bundles and caching API calls\nIntroduced automated tests that reduced production bugs by 30%\nMentored two junior developers through their first releases' },
+      { id: uid(), role: 'Junior Web Developer', company: 'Kasa Logistics', location: 'Accra', start: '2019-08', end: '2022-01', current: false, bullets: 'Developed a delivery tracking portal that replaced a manual spreadsheet process\nWrote REST APIs and SQL queries serving 5,000 daily requests\nWorked with operations staff to turn their requests into clear, shippable features' }
+    ],
+    education: [{ id: uid(), school: 'University of Ghana', degree: 'B.Sc. Computer Science', start: '2015-09', end: '2019-06', details: 'First Class Honours. Final project: a bus arrival predictor.' }],
+    skills: ['JavaScript', 'React', 'Node.js', 'TypeScript', 'PostgreSQL', 'REST APIs', 'Git', 'AWS basics'],
+    projects: [], certifications: [{ id: uid(), name: 'AWS Certified Cloud Practitioner', issuer: 'Amazon Web Services', year: '2023' }],
+    languages: [{ id: uid(), name: 'English', level: 'Fluent' }, { id: uid(), name: 'Twi', level: 'Native' }] }) },
+  { key: 'Nurse', make: () => Object.assign(blank(), {
+    accent: '#188554',
+    personal: { name: 'Ngozi Eze', title: 'Registered Nurse', email: 'ngozi.eze@example.com', phone: '+234 803 555 0199', location: 'Abuja, Nigeria', website: '', linkedin: 'linkedin.com/in/ngozieze' },
+    summary: 'Compassionate registered nurse with 7 years of experience in medical and surgical wards. Cares for up to 12 patients a shift while keeping accurate records and calm communication with families. Trained in infection control and emergency response, and known for helping new nurses settle in.',
+    experience: [
+      { id: uid(), role: 'Staff Nurse', company: 'Garki General Hospital', location: 'Abuja', start: '2019-04', end: '', current: true, bullets: 'Provide safe, compassionate care to up to 12 patients per shift\nAdminister medication and monitor vital signs with zero recorded dosage errors in 2023\nCoordinate with doctors and pharmacists on daily care plans\nTrained 8 newly qualified nurses on ward routines and infection control' },
+      { id: uid(), role: 'Nurse', company: 'Grace Community Clinic', location: 'Kaduna', start: '2016-09', end: '2019-03', current: false, bullets: 'Supported maternal and child health clinics seeing 60+ patients a day\nRecorded patient histories accurately and followed up missed appointments\nLed monthly health talks on hygiene and nutrition for the community' }
+    ],
+    education: [{ id: uid(), school: 'University of Nigeria, Nsukka', degree: 'B.N.Sc. Nursing Science', start: '2011-09', end: '2016-07', details: 'Registered with the Nursing and Midwifery Council of Nigeria.' }],
+    skills: ['Patient care', 'Medication administration', 'Infection control', 'Vital signs monitoring', 'Record keeping', 'Emergency response', 'Health education'],
+    projects: [], certifications: [{ id: uid(), name: 'Basic Life Support (BLS)', issuer: 'American Heart Association', year: '2023' }],
+    languages: [{ id: uid(), name: 'English', level: 'Fluent' }, { id: uid(), name: 'Igbo', level: 'Native' }] }) },
+  { key: 'Sales', make: () => Object.assign(blank(), {
+    accent: '#c45000',
+    personal: { name: 'Tunde Bello', title: 'Sales & Marketing Executive', email: 'tunde.bello@example.com', phone: '+234 802 555 0123', location: 'Lagos, Nigeria', website: '', linkedin: 'linkedin.com/in/tundebello' },
+    summary: 'Results-driven sales executive with 6 years in retail and FMCG. Grew a territory from 40 to 95 active outlets and beat quarterly targets in 7 of the last 8 quarters. Builds long-term customer relationships, negotiates well and uses simple data to decide where to spend time.',
+    experience: [
+      { id: uid(), role: 'Sales Executive', company: 'Bright Foods Nigeria', location: 'Lagos', start: '2021-01', end: '', current: true, bullets: 'Grew the Lagos Mainland territory from 40 to 95 active outlets in two years\nExceeded quarterly sales targets in 7 of the last 8 quarters\nNegotiated shelf space and promotions with 15 key supermarket accounts\nTracked weekly sales in Excel to spot slow outlets and act early' },
+      { id: uid(), role: 'Sales Associate', company: 'Jumia Nigeria', location: 'Lagos', start: '2018-03', end: '2020-12', current: false, bullets: 'Sold phones and electronics to 30+ customers a day and met every monthly target\nResolved customer complaints quickly and kept satisfaction ratings above 90%\nTrained 4 new sales staff on product knowledge' }
+    ],
+    education: [{ id: uid(), school: 'Lagos State University', degree: 'B.Sc. Marketing', start: '2013-09', end: '2017-07', details: 'Second Class Upper.' }],
+    skills: ['Sales strategy', 'Negotiation', 'Customer relationships', 'Lead generation', 'Microsoft Excel', 'Social media marketing', 'Presentation'],
+    projects: [], certifications: [{ id: uid(), name: 'Digital Marketing Fundamentals', issuer: 'Google', year: '2022' }],
+    languages: [{ id: uid(), name: 'English', level: 'Fluent' }, { id: uid(), name: 'Yoruba', level: 'Native' }] }) },
+  { key: 'Accountant', make: () => Object.assign(blank(), {
+    accent: '#7c3aed',
+    personal: { name: 'Fatima Yusuf', title: 'Accountant', email: 'fatima.yusuf@example.com', phone: '+234 805 555 0166', location: 'Kano, Nigeria', website: '', linkedin: 'linkedin.com/in/fatimayusuf' },
+    summary: 'ACA-qualified accountant with 8 years of experience in audit and financial reporting. Closes monthly books in 4 working days and has helped three companies pass external audits without major findings. Careful, organised and skilled at explaining numbers to non-finance colleagues.',
+    experience: [
+      { id: uid(), role: 'Senior Accountant', company: 'Sahel Agro Ltd', location: 'Kano', start: '2020-06', end: '', current: true, bullets: 'Prepare monthly management accounts and close the books within 4 working days\nManage payables and receivables worth over N2 billion a year\nSupported 3 external audits with no major findings\nBuilt an Excel budget tracker that cut reporting time by half' },
+      { id: uid(), role: 'Audit Associate', company: 'Danladi & Partners', location: 'Kaduna', start: '2016-08', end: '2020-05', current: false, bullets: 'Audited 20+ small and mid-sized clients across trading and manufacturing\nTested controls and reported findings clearly to client management\nPrepared working papers that reviewers approved with few corrections' }
+    ],
+    education: [{ id: uid(), school: 'Bayero University Kano', degree: 'B.Sc. Accounting', start: '2010-09', end: '2014-07', details: 'First Class Honours.' }],
+    skills: ['Financial reporting', 'Auditing', 'Budgeting', 'Tax compliance', 'Microsoft Excel', 'QuickBooks', 'Reconciliation'],
+    projects: [], certifications: [{ id: uid(), name: 'Associate Chartered Accountant (ACA)', issuer: 'ICAN', year: '2018' }],
+    languages: [{ id: uid(), name: 'English', level: 'Fluent' }, { id: uid(), name: 'Hausa', level: 'Native' }] }) }
+];
+PERSONAS[0].label = 'Quality'; PERSONAS[1].label = 'Developer'; PERSONAS[2].label = 'Nurse'; PERSONAS[3].label = 'Sales'; PERSONAS[4].label = 'Accountant';
+let galP = 0, galEl = null;
+function galShell() {
+  if (galEl) return galEl;
+  galEl = document.createElement('div'); galEl.className = 'modal'; galEl.id = 'galModal'; galEl.hidden = true;
+  galEl.innerHTML = '<div class="modal-card sheet gal" role="dialog" aria-modal="true" aria-label="Example resumes"></div>';
+  galEl.addEventListener('mousedown', e => { if (e.target === galEl) galClose(); });
+  galEl.addEventListener('click', onGalClick);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !galEl.hidden) galClose(); });
+  document.body.appendChild(galEl);
+  window.addEventListener('resize', galScale);
+  return galEl;
+}
+function galClose() { if (galEl) galEl.hidden = true; }
+function galScale() {
+  if (!galEl || galEl.hidden) return;
+  galEl.querySelectorAll('.gal-wrap').forEach(w => { const p = w.firstElementChild, k = w.clientWidth / (210 * 3.7795); p.style.transform = `scale(${k})`; });
+}
+function galRender() {
+  const sh = $('.gal', galShell());
+  const old = sh.scrollTop;
+  const chips = PERSONAS.map((p, i) => `<button class="chip ${i === galP ? 'on' : ''}" data-gal-p="${i}" aria-pressed="${i === galP}">${p.label}</button>`).join('');
+  const cards = TEMPLATES.map(t => {
+    const st = Object.assign(PERSONAS[galP].make(), { template: t.id });
+    return `<div class="gal-card"><div class="gal-wrap" data-gal-open="${t.id}" role="button" tabindex="0" aria-label="Open ${t.name} example"><article class="page t-${t.id} f-${st.font || 'sans'}" style="--accent:${st.accent};--fs:${st.size || 10.5}pt;width:210mm;min-height:297mm;transform-origin:0 0;position:absolute;left:0;top:0;box-shadow:none">${resumeHTML(st)}</article></div>
+      <b>${t.name}</b><small>${esc(t.note)}</small>
+      <div class="gal-btns"><button class="btn small" data-gal-look="${t.id}">Use this look</button><button class="btn small primary" data-gal-edit="${t.id}">Edit this example</button></div></div>`;
+  }).join('');
+  sh.innerHTML = `<div class="iv-top"><p class="eyebrow" style="margin:0">Examples</p><button class="icon-btn" data-gal-x="1" aria-label="Close">✕</button></div>
+    <h2>See how a finished resume looks</h2><p class="lead">Pick a sample person, then compare every design filled in. Tap <b>Use this look</b> to keep the design for your own details, or <b>Edit this example</b> to change the sample into yours.</p>
+    <div class="gal-chips" role="group" aria-label="Sample person">${chips}</div><div class="gal-grid">${cards}</div>`;
+  galEl.hidden = false;
+  requestAnimationFrame(() => { galScale(); sh.scrollTop = old; });
+}
+function onGalClick(e) {
+  const t = e.target.closest('[data-gal-p],[data-gal-x],[data-gal-open],[data-gal-look],[data-gal-edit]'); if (!t) return;
+  const d = t.dataset;
+  if (d.galX) return galClose();
+  if (d.galP != null) { galP = +d.galP; return galRender(); }
+  const id = d.galLook || d.galEdit || d.galOpen;
+  if (d.galLook) {
+    const had = S.personal.name || S.experience.length;
+    S.template = id; renderPreview(); save(); galClose(); $('#welcome').hidden = true;
+    if (!had && window.FolioAI && window.FolioAI.actions.quick) window.FolioAI.actions.quick();
+    else toast('Design changed. Your details are unchanged.');
+    return;
+  }
+  S = Object.assign(PERSONAS[galP].make(), { template: id }); step = 0; galClose(); $('#welcome').hidden = true;
+  renderEditor(); renderPreview(); save(); toast('Example loaded. Replace the details with yours.');
+}
+
+function startVia(name) {
+  const f = window.FolioAI && window.FolioAI.actions && window.FolioAI.actions[name];
+  if (!f) { toast('Still loading. Please tap again in a moment, or choose "Build it step by step".'); return; }
+  try { f(); $('#welcome').hidden = true; } catch (err) { toast('Something went wrong. Please try again or build it step by step.'); }
+}
 function onClick(e) {
   const b = e.target.closest('[data-action]');
   const menu = $('#menu');
@@ -1301,8 +1423,8 @@ function polishLine(l) {
 }
 function bulletsFromText(t) {
   const PAST = '(?:[a-z]+ed|wrote|led|ran|made|built|kept|sold|took|set|did|gave|taught|drove|held|met|got|found|sent|chose|began|brought)';
-  return String(t || '')
-    .split(new RegExp(`\\n|;|(?<=[.!?])\\s+(?=[A-Z])|,\\s*(?:and\\s+)?(?=[a-zA-Z])|\\s+and\\s+(?=(?:i\\s+)?${PAST}\\b)`, 'i'))
+  return String(t || '').replace(/([.!?])\s+(?=[A-Z])/g, '$1\n')
+    .split(new RegExp(`\\n|;|,\\s*(?:and\\s+)?(?=[a-zA-Z])|\\s+and\\s+(?=(?:i\\s+)?${PAST}\\b)`, 'i'))
     .map(polishLine).filter(x => x.length > 3).slice(0, 6);
 }
 const ROLES = [
@@ -1950,7 +2072,7 @@ function local(goalText) {
     { style: 'Value-led', text: `${title} helping teams deliver ${top[0] ? top[0].toLowerCase() : 'quality work'} they can rely on` + (top[1] ? `, with ${top[1]}` : "") },
     { style: 'Human', text: `${title}${co}. ${top.length ? 'Into ' + top.slice(0, 2).join(' and ').toLowerCase() + '.' : 'Always learning.'}` }
   ].map(h => ({ ...h, text: h.text.slice(0, 220) }));
-  const sents = (s.summary || '').split(/(?<=[.!?])\s+/).filter(Boolean);
+  const sents = (s.summary || '').replace(/([.!?])\s+/g, '$1\n').split('\n').filter(Boolean);
   const hook = sents[0] || `I do my best work when ${top[0] ? top[0].toLowerCase() : 'quality'} matters.`;
   const co2 = job.company ? ` at ${job.company.replace(/[.\s]+$/, '')}` : '';
   const about = [
