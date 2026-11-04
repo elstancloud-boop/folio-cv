@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Folio · Build a standout resume</title>
-<meta name="description" content="Build a modern, ATS-friendly resume step by step with a live preview. Private: everything stays in your browser.">
+<title>Folio | Free AI Resume Builder &amp; CV Maker</title>
+<meta name="description" content="Create an ATS-friendly resume or CV in minutes with Folio’s free AI resume builder. Import an old CV, tailor it to a job, and download a polished PDF.">
+<meta property="og:title" content="Folio | Free AI Resume Builder &amp; CV Maker">
+<meta property="og:description" content="Create an ATS-friendly resume or CV in minutes. Build with AI, tailor to a job, and download a polished PDF.">
+<meta property="og:type" content="website">
 <meta name="theme-color" content="#fbfcfd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Cpath d='M10 8h13v4h-8.5v3.5H21v4h-6.5V25h-4.5z' fill='%23fff'/%3E%3C/svg%3E">
 <style>:root{
@@ -605,7 +608,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--indigo);box-shadow:0 
 
 <div class="modal" id="welcome" hidden>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="wTitle">
-    <p class="eyebrow">Welcome to Folio</p>
+    <p class="eyebrow">Folio · AI Resume Builder</p>
     <h1 id="wTitle">A resume built in <span class="px">10 minutes.</span></h1>
     <p>Answer a few plain questions. Your resume builds itself on the right, and you can change the look at any time. Nothing leaves your device.</p>
     <div class="choices">
@@ -1527,11 +1530,12 @@ function apply(data, label) {
   open(`<p class="eyebrow">${esc(label)}</p><h2>Your CV is ready \ud83c\udf89</h2>
     <p class="lead">It is full and ready. Check the highlighted extras, then take a look. You can edit every line.</p>
     <div class="iv-scroll mid">${review}${tips.length ? `<div class="tip"><b>To make it even stronger</b><ul>${tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>` : ''}</div>
-    <div class="modal-actions"><button class="btn primary big" data-ai="see">See my CV</button><button class="btn big" data-ai="edit">Edit details</button></div>`);
+    <div class="modal-actions"><button class="btn primary big" data-ai="see">See my CV</button><button class="btn big" data-ai="edit">Edit details</button></div>
+    <button class="btn big" data-ai="linkedin" style="margin-top:8px">💼 Now match my LinkedIn</button>`);
   const sh = $('.sheet');
   sh.onclick = e => {
     const btn = e.target.closest('button[data-ai]'); if (!btn) return; const a = btn.dataset.ai;
-    if (a === 'see' || a === 'edit') {
+    if (a === 'see' || a === 'edit' || a === 'linkedin') {
       const dropB = sugB.map((bl, i) => bl.filter((_, j) => { const c = sh.querySelector(`[data-sb="${i}:${j}"]`); return c && !c.checked; }).map(norm));
       const dropS = sugS.filter((_, j) => { const c = sh.querySelector(`[data-ss="${j}"]`); return c && !c.checked; }).map(norm);
       if (dropB.flat().length || dropS.length) F().patch(s => {
@@ -1543,6 +1547,7 @@ function apply(data, label) {
     close();
     if (a === 'see' && isMobile()) F().pane('preview');
     if (a === 'edit') { F().pane('edit'); F().goto(0); }
+    if (a === 'linkedin') setTimeout(() => window.FolioAI.actions.linkedin && window.FolioAI.actions.linkedin(), 60);
   };
 }
 
@@ -1915,7 +1920,7 @@ lineHelper();
 const AI = window.FolioAI; if (!AI) return;
 const U = AI._ui, F = () => window.Folio, esc = U.esc, str = U.str;
 let D = null, tab = 'headline', goal = '';
-const TABS = [['headline', 'Headline'], ['about', 'About'], ['exp', 'Experience'], ['skills', 'Skills'], ['setup', 'Profile setup'], ['banner', 'Banner'], ['msgs', 'Messages']];
+const TABS = [['headline', 'Headline'], ['about', 'About'], ['exp', 'Experience'], ['skills', 'Skills'], ['edu', 'Education'], ['posts', 'Posts'], ['setup', 'Profile setup'], ['banner', 'Banner'], ['msgs', 'Messages']];
 const CHECK = [
   ['photo', 'Profile photo', 'A clear, friendly head-and-shoulders shot, plain background, face filling about 60% of the circle.'],
   ['banner', 'Banner image', 'Upload the banner from the Banner tab.'],
@@ -1925,6 +1930,8 @@ const CHECK = [
   ['skills', 'Skills', 'Add all skills, then pin your top 3 (Profile > Skills > pencil > reorder).'],
   ['url', 'Custom profile URL', 'Claim a clean address. Use a suggestion from the Banner tab.', 'https://www.linkedin.com/public-profile/settings'],
   ['loc', 'Location and industry', 'Recruiters filter by these. Set both accurately.'],
+  ['edu', 'Education and certificates', 'Fill both sections from the Education tab.'],
+  ['post', 'First post', 'Publish the intro post from the Posts tab so your profile shows activity.'],
   ['featured', 'Featured section', 'Pin 1 to 3 items: a project, certificate, article or a post about your work.'],
   ['otw', 'Open to Work (recruiters only)', 'Set your target job titles and locations. Choose “recruiters only” to keep it private.'],
   ['recs', 'Two or three recommendations', 'Ask a manager or colleague. Send them a short note naming what to mention.']
@@ -2016,6 +2023,10 @@ function pane() {
     case 'exp': return `<p class="lead">Same facts as your CV, written to be skimmed on LinkedIn.</p>` + (D.exp.length ? D.exp.map((e, i) => `<div class="hl"><span class="lbl">${esc(e.role)} · ${esc(e.company)}</span>${copyBox('e' + i, e.text, 5, 2000)}</div>`).join('') : '<p class="hint">Add a job in the CV first.</p>');
     case 'skills': return `<p class="lead">Add all of these, then pin the top three. Recruiters search by skill.</p><span class="lbl">Pin these 3</span><div class="chips">${D.skills.top.map(k => `<span class="chip pin">📌 ${esc(k)}</span>`).join('')}</div><span class="lbl">Then add</span><div class="chips">${D.skills.more.map(k => `<span class="chip">${esc(k)}</span>`).join('')}</div><button class="btn small" data-li-copy="skillsAll">Copy all skills</button>
       <p class="lbl" style="margin-top:16px">Recruiter search keywords</p><div class="chips">${D.keywords.map(k => `<span class="chip sug">${esc(k)}</span>`).join('')}</div><p class="hint">Use these words naturally in your headline, About and job descriptions.</p>`;
+    case 'edu': extras(); return `<p class="lead">Fill the Education and Licenses &amp; certifications sections. Recruiters check both.</p>` +
+      (D.edu.length ? D.edu.map((e, i) => `<div class="hl"><span class="lbl">Education · ${esc(e.head)}</span>${copyBox('d' + i, e.text, 3, 1000)}</div>`).join('') : '<p class="hint">Add your education in the CV first, then regenerate.</p>') +
+      (D.certs.length ? D.certs.map((e, i) => `<div class="hl"><span class="lbl">Certificate · ${esc(e.head)}</span>${copyBox('c' + i, e.text, 2, 500)}</div>`).join('') : '');
+    case 'posts': extras(); return `<p class="lead">Posting a few times a month lifts your profile in search. Replace anything in [brackets] with a real detail.</p>` + D.posts.map((e, i) => `<div class="hl"><span class="lbl">${esc(e.label)}</span>${copyBox('p' + i, e.text, 8, 3000)}</div>`).join('');
     case 'setup': {
       const done = CHECK.filter(c => li.done[c[0]]).length, pct = Math.round(done / CHECK.length * 100);
       return `<div class="score"><div class="ring" style="--p:${pct};--c:${pct > 70 ? 'var(--ok)' : 'var(--warn)'}"><i>${pct}</i></div><div><b>Profile strength</b><div class="hint">Tick each item as you finish it on LinkedIn.</div></div></div>
@@ -2039,13 +2050,16 @@ function card() {
 function render() {
   const old = document.querySelector('#aiModal .sheet'), y = old ? old.scrollTop : 0;
   const sh = U.open(`<div class="iv-top"><p class="eyebrow" style="margin:0">💼 LinkedIn Studio</p><button class="icon-btn" data-li-x="1" aria-label="Close">✕</button></div>
-    ${card()}<div class="litabs" role="tablist">${TABS.map(t => `<button role="tab" data-li-tab="${t[0]}" aria-selected="${tab === t[0]}">${t[1]}</button>`).join('')}</div><div class="lipane">${pane()}</div>
+    ${card()}${(F().state.li && F().state.li.sig && F().state.li.sig !== sig()) ? '<div class="tip"><b>Your CV has changed since this was written.</b> <button class="btn small" data-li-regen="1">Refresh from my CV</button></div>' : ''}<div class="litabs" role="tablist">${TABS.map(t => `<button role="tab" data-li-tab="${t[0]}" aria-selected="${tab === t[0]}">${t[1]}</button>`).join('')}</div><div class="lipane">${pane()}</div>
     <div class="modal-actions"><button class="btn" data-li-regen="1">↻ Regenerate</button></div>`);
   sh.scrollTop = y;
   sh.oninput = e => {
     const k = e.target.dataset.li; if (!k) return;
     if (k[0] === 'h') D.headlines[+k.slice(1)].text = e.target.value;
     else if (k === 'about') D.about = e.target.value;
+    else if (k[0] === 'd') D.edu[+k.slice(1)].text = e.target.value;
+    else if (k[0] === 'c') D.certs[+k.slice(1)].text = e.target.value;
+    else if (k[0] === 'p') D.posts[+k.slice(1)].text = e.target.value;
     else if (k[0] === 'e') D.exp[+k.slice(1)].text = e.target.value;
     else if (k.startsWith('o_')) D.outreach[k.slice(2)] = e.target.value;
     else if (k === 'b1') D.banner.l1 = e.target.value; else if (k === 'b2') D.banner.l2 = e.target.value;
@@ -2066,7 +2080,25 @@ function render() {
   function $(s) { return sh.querySelector(s); }
 }
 function copy(t) { navigator.clipboard.writeText(t).then(() => F().toast('Copied. Paste it into LinkedIn.'), () => F().toast('Copy was blocked. Select the text and copy it.')); }
-function persist() { const s = F().state; s.li = s.li || { done: {} }; s.li.data = D; F().save(); }
+function extras() {
+  const s = F().state, p = s.personal, L = F().lines, str = v => String(v || '').trim();
+  const title = str(p.title) || str((s.experience[0] || {}).role) || 'professional', top = (D.skills && D.skills.top) || s.skills.slice(0, 3);
+  const tl = top.length ? top.join(', ') : 'the work I do';
+  if (!Array.isArray(D.edu)) {
+    D.edu = (s.education || []).map(e => ({ head: [e.degree, e.school].filter(Boolean).join(' · '), text: [str(e.degree) && str(e.school) ? `${e.degree} at ${e.school}.` : '', str(e.details)].filter(Boolean).join(' ') })).filter(e => e.head);
+    D.certs = (s.certifications || []).map(c => ({ head: [c.name, c.issuer].filter(Boolean).join(' · '), text: `${c.name}${c.issuer ? ', issued by ' + c.issuer : ''}${c.year ? ' (' + c.year + ')' : ''}. Add the credential ID or link if you have one.` })).filter(c => c.head);
+  }
+  if (!Array.isArray(D.posts)) {
+    const best = (s.experience.flatMap(e => L(e.bullets))[0] || '').replace(/^[•\-\s]+/, '').replace(/\.$/, '');
+    D.posts = [
+      { label: 'Introduce yourself', text: `Hello LinkedIn.\n\nI am a ${title.toLowerCase()} and I am updating my profile to share more of what I do.\n\nWhat I am good at: ${tl}.\n${best ? '\nSomething I am proud of: ' + best.charAt(0).toLowerCase() + best.slice(1) + '.\n' : ''}\nIf you work in this area, I would love to connect and learn from you.\n\n#${title.replace(/[^A-Za-z]+/g, '')} #CareerGrowth` },
+      { label: 'Share a lesson', text: `One lesson from my work as a ${title.toLowerCase()}:\n\nThe basics done consistently beat clever shortcuts.\n\nThat means [one real example from your job here].\n\nWhat is one habit that made you better at your work?` },
+      { label: 'Open to work', text: `I am open to new ${title.toLowerCase()} opportunities${p.location ? ' in ' + p.location + ' or remote' : ''}.\n\nI bring: ${tl}.\n\nIf your team is hiring, or you know someone who is, a message or an introduction would mean a lot. Thank you.\n\n#OpenToWork #${title.replace(/[^A-Za-z]+/g, '')}` }
+    ];
+  }
+}
+function sig() { const t = F().text(); let h = 0; for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) | 0; return String(h); }
+function persist() { const s = F().state; s.li = s.li || { done: {} }; s.li.data = D; if (!s.li.sig) s.li.sig = sig(); F().save(); }
 
 async function gen(force) {
   const st = F().state;
@@ -2075,7 +2107,7 @@ async function gen(force) {
   let d, ok = false;
   try { if (!U.available()) throw 0; d = clean(await U.ai('linkedin', { resume: F().text(), goal }), true); ok = d.headlines.length && d.about; } catch (e) { ok = false; }
   if (!ok) d = local(goal);
-  D = d; stop(); tab = 'headline'; persist(); render();
+  D = d; stop(); tab = 'headline'; st.li = st.li || { done: {} }; st.li.sig = sig(); persist(); render();
   if (!U.available()) F().toast('Built with the offline helper. Review each part.');
 }
 function start() {
