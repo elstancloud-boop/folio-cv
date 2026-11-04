@@ -12,8 +12,8 @@ const MODEL = MODELS[0];
 const LOCAL = /\/\/(localhost|127\.0\.0\.1|\[::1\])/.test(BASE);
 const ENABLED = !!KEY || LOCAL;
 const ROOT = __dirname;
-const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.json': 'application/json', '.woff2': 'font/woff2' };
-const STATIC_OK = new Set(['index.html', 'styles.css', 'app.js', 'ai.js', 'linkedin.js', 'cover.js', 'sw.js', 'manifest.webmanifest']);
+const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.json': 'application/json', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml' };
+const STATIC_OK = new Set(['index.html', 'styles.css', 'app.js', 'ai.js', 'linkedin.js', 'cover.js', 'jobs.js', 'sw.js', 'manifest.webmanifest', 'robots.txt', 'sitemap.xml']);
 
 /* ---------- prompts ---------- */
 const SCHEMA = `Return ONLY a JSON object with this exact shape (use "" or [] when unknown):

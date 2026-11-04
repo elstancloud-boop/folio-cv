@@ -4,11 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Folio | AI Resume Builder &amp; LinkedIn Profile Generator</title>
-<meta name="description" content="Free AI resume builder and CV maker to create a tailored resume, LinkedIn profile, posts and job-specific cover letters. Preview and download a polished PDF.">
+<meta name="description" content="Build a full, ATS-friendly resume in under 10 minutes and tailor your LinkedIn profile to match. Free AI CV maker with cover letters, job match score and interview practice.">
+<meta name="keywords" content="AI resume builder, CV maker, free resume builder, LinkedIn profile optimizer, LinkedIn headline generator, cover letter generator, ATS resume, resume templates">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="Folio">
+<link rel="canonical" href="https://folio-cv-s9v8.onrender.com/">
 <meta property="og:title" content="Folio | AI Resume Builder &amp; LinkedIn Profile Generator">
-<meta property="og:description" content="Build a tailored resume, LinkedIn profile, posts, and cover letters with Folio’s free AI career toolkit.">
+<meta property="og:description" content="Build a full resume in under 10 minutes, then tailor your LinkedIn to match. Free, private, works on any phone.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://folio-cv-s9v8.onrender.com/">
+<meta property="og:site_name" content="Folio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Folio | AI Resume Builder &amp; LinkedIn Profile Generator">
+<meta name="twitter:description" content="Full resume in under 10 minutes, plus a LinkedIn profile tailored to match.">
 <meta name="theme-color" content="#fbfcfd">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Folio", "url": "https://folio-cv-s9v8.onrender.com/", "description": "Free AI resume builder and CV maker that also tailors your LinkedIn profile, writes cover letters and helps you prepare for interviews.", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "featureList": ["AI resume builder", "Nine modern ATS-friendly resume templates", "LinkedIn profile optimiser", "Cover letter generator", "Job match score and keyword gaps", "Application tracker", "Interview practice"]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Folio really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You can build your resume, tailor your LinkedIn profile, write a cover letter and practise interviews without paying or entering a card."}}, {"@type": "Question", "name": "How long does it take to make a resume with Folio?", "acceptedAnswer": {"@type": "Answer", "text": "Most people finish in under 10 minutes. You can start with just your name and the job you want, and Folio fills in a full resume that you then edit."}}, {"@type": "Question", "name": "Can Folio optimise my LinkedIn profile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. LinkedIn Studio writes a headline, About section, experience, skills, banner and posts from your resume, so your profile and CV tell the same story."}}, {"@type": "Question", "name": "Will my resume pass applicant tracking systems (ATS)?", "acceptedAnswer": {"@type": "Answer", "text": "Folio uses clean, single-flow layouts and checks your resume against a job advert so you can add the keywords recruiters search for."}}, {"@type": "Question", "name": "Is my information private?", "acceptedAnswer": {"@type": "Answer", "text": "Your details are stored on your own device. The AI only sees your text when you ask it to write or improve something."}}]}]</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Cpath d='M10 8h13v4h-8.5v3.5H21v4h-6.5V25h-4.5z' fill='%23fff'/%3E%3C/svg%3E">
 <style>:root{
   --sans:"Geist Sans","Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
@@ -634,9 +644,19 @@ body.on-home .app{display:none}
 .h-final .btn.primary{background:#fff;color:#111}
 .h-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:20px max(18px,calc((100% - 1160px)/2));color:var(--mute);font-size:13px}
 @media (max-width:860px){.h-hero{grid-template-columns:1fr;padding-top:30px;gap:30px}.h-links{display:none}.h-grid,.h-steps{grid-template-columns:1fr}.h-signup{display:none}.h-visual{max-width:340px}.h-pill.p1{left:-4px}.h-pill.p2{right:-4px}.h-btns .btn{flex:1 1 100%}.h-sec{padding-top:44px;padding-bottom:44px}}
+
+.h-faq{display:grid;gap:10px;max-width:820px}
+.h-faq details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0 18px}
+.h-faq summary{cursor:pointer;font-weight:600;padding:16px 0;min-height:48px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.h-faq summary::-webkit-details-marker{display:none}.h-faq summary:after{content:"+";font-family:var(--mono)}
+.h-faq details[open] summary:after{content:"\2212"}
+.h-faq p{margin:0 0 16px;color:var(--ink2);line-height:1.55}
+.h-foot small{display:block;margin-top:6px;max-width:640px;line-height:1.5}
+.h-legal{display:flex;gap:16px;align-items:flex-start}.h-legal button{border:0;background:none;color:var(--ink2);font:inherit;cursor:pointer;text-decoration:underline;min-height:44px}
 </style>
 </head>
 <body>
+<noscript><div style="padding:24px;font-family:system-ui;max-width:640px;margin:auto"><h1>Folio: free AI resume builder &amp; LinkedIn profile generator</h1><p>Folio builds a full, ATS-friendly resume in under 10 minutes and tailors your LinkedIn profile, cover letter and interview practice to match. Please turn on JavaScript to use it.</p></div></noscript>
 <div class="app" id="app">
   <header class="topbar">
     <button class="brand" data-action="home" aria-label="Folio home" type="button"><span class="logo" aria-hidden="true">F</span><span class="brand-name">Folio</span></button>
@@ -700,14 +720,14 @@ body.on-home .app{display:none}
 <div class="home" id="home" hidden>
   <header class="h-nav">
     <button class="brand" data-action="home-top" type="button" aria-label="Folio"><span class="logo" aria-hidden="true">F</span><span class="brand-name">Folio</span></button>
-    <nav class="h-links" aria-label="Sections"><a href="#h-features">Features</a><a href="#h-how">How it works</a><a href="#h-designs">Designs</a></nav>
+    <nav class="h-links" aria-label="Sections"><a href="#h-features">Features</a><a href="#h-how">How it works</a><a href="#h-designs">Designs</a><a href="#h-faq">FAQ</a></nav>
     <div class="h-cta"><button class="btn ghost h-signup" data-action="home-start" type="button">Sign up</button><button class="btn primary" data-action="home-start" type="button">Get started free</button></div>
   </header>
   <section class="h-hero">
     <div class="h-copy">
-      <p class="eyebrow">AI resume · LinkedIn · job search tools</p>
-      <h1>Your resume, LinkedIn and job search. <span class="px">Done in 10 minutes.</span></h1>
-      <p class="h-sub">Answer a few plain questions and Folio writes a full, polished resume, a matching LinkedIn profile and a cover letter. Then it scores your fit for any job and helps you win the interview.</p>
+      <p class="eyebrow">AI resume builder · LinkedIn optimiser</p>
+      <h1>Your resume and LinkedIn, <span class="px">done in under 10 minutes.</span></h1>
+      <p class="h-sub">Tell Folio the job you want. It knows what a strong CV for that role looks like and writes it for you, then tailors your LinkedIn profile to match. You just remove what is not true. Free, private and works on any phone.</p>
       <div class="h-btns"><button class="btn primary big" data-action="home-start" type="button" id="hStart">Get started free</button><button class="btn big" data-action="home-examples" type="button">See filled examples</button></div>
       <button class="linkbtn" data-action="home-continue" type="button" id="hContinue" hidden>Continue my CV &rarr;</button>
       <ul class="h-trust"><li>No card, no sign-up wall</li><li>Your data stays on your device</li><li>Works on any phone</li></ul>
@@ -717,9 +737,9 @@ body.on-home .app{display:none}
   <section class="h-sec" id="h-features">
     <p class="eyebrow">Everything in one place</p><h2>Built for people who have never written a CV</h2>
     <div class="h-grid">
-      <article><i>⚡</i><h3>Two answers to a full CV</h3><p>Give your name and job. Folio fills the summary, bullets and skills for you, marks what it added, and you untick anything untrue.</p></article>
+      <article><i>⚡</i><h3>Knows your job</h3><p>Say the role you want. Folio adds the summary, bullets, skills, education and certificates people in that job usually list. You untick anything that is not yours.</p></article>
       <article><i>🎨</i><h3>Nine modern designs</h3><p>Switch looks in one tap. Click any text to edit it, and zoom to check every detail before you download.</p></article>
-      <article><i>💼</i><h3>LinkedIn Studio</h3><p>Headline, About, experience, skills, banner and posts, all written from your CV so your profile matches.</p></article>
+      <article><i>💼</i><h3>LinkedIn, tailored to your CV</h3><p>Headline, About section, experience, skills, banner and posts, written from your resume so your profile and CV match.</p></article>
       <article><i>🧭</i><h3>Job match score</h3><p>Paste a job advert. See your fit out of 100, the keywords you are missing and the one thing to fix first.</p></article>
       <article><i>📌</i><h3>Application tracker</h3><p>Keep every job in one board, from Saved to Offer, with a next-step tip and follow-up reminders.</p></article>
       <article><i>🎤</i><h3>Interview practice</h3><p>Real questions from the job and your CV. Type an answer and get a score with tips, plus ready follow-up emails.</p></article>
@@ -735,14 +755,15 @@ body.on-home .app{display:none}
     <div class="h-strip" id="hStrip"></div>
     <div class="h-center"><button class="btn big" data-action="home-examples" type="button">Browse all filled examples</button></div>
   </section>
-  <section class="h-final"><h2>Ready to get hired?</h2><p>It takes about ten minutes, and it is free.</p><button class="btn primary big" data-action="home-start" type="button">Get started free</button></section>
-  <footer class="h-foot"><span>Folio · AI resume builder &amp; LinkedIn profile generator</span><span>Your details are stored only on your device.</span></footer>
+  <section class="h-sec alt" id="h-faq"><p class="eyebrow">Questions</p><h2>Good to know</h2><div class="h-faq"><details><summary>Is Folio really free?</summary><p>Yes. You can build your resume, tailor your LinkedIn profile, write a cover letter and practise interviews without paying or entering a card.</p></details><details><summary>How long does it take to make a resume with Folio?</summary><p>Most people finish in under 10 minutes. You can start with just your name and the job you want, and Folio fills in a full resume that you then edit.</p></details><details><summary>Can Folio optimise my LinkedIn profile?</summary><p>Yes. LinkedIn Studio writes a headline, About section, experience, skills, banner and posts from your resume, so your profile and CV tell the same story.</p></details><details><summary>Will my resume pass applicant tracking systems (ATS)?</summary><p>Folio uses clean, single-flow layouts and checks your resume against a job advert so you can add the keywords recruiters search for.</p></details><details><summary>Is my information private?</summary><p>Your details are stored on your own device. The AI only sees your text when you ask it to write or improve something.</p></details></div></section>
+  <section class="h-final"><h2>Ready to get hired?</h2><p>Most people finish in under ten minutes, and it is free.</p><button class="btn primary big" data-action="home-start" type="button">Get started free</button></section>
+  <footer class="h-foot"><div><b>Folio</b> · AI resume builder &amp; LinkedIn profile generator<br><small>&copy; 2026 Folio. All rights reserved. Folio is an independent tool and is not affiliated with or endorsed by LinkedIn. LinkedIn is a trademark of LinkedIn Corporation.</small></div><div class="h-legal"><button type="button" data-action="legal-privacy">Privacy</button><button type="button" data-action="legal-terms">Terms</button></div></footer>
 </div>
 
 <div class="modal" id="welcome" hidden>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="wTitle">
     <p class="eyebrow">Folio · AI Resume &amp; LinkedIn Builder</p>
-    <h1 id="wTitle">A resume built in <span class="px">10 minutes.</span></h1>
+    <h1 id="wTitle">A resume built in <span class="px">under 10 minutes.</span></h1>
     <p>Answer a few plain questions. Your resume builds itself on the right, and you can change the look at any time. Nothing leaves your device.</p>
     <div class="choices">
       <button class="choice" data-action="start-quick"><b>⚡ Just my name and job</b><span>Fastest. We write a full, polished CV from almost nothing.</span></button>
@@ -996,11 +1017,11 @@ const SECTIONS = {
     return `<div class="r-item"><div class="r-row"><b data-ed="experience.${i}.role">${esc(x.role || 'Job title')}</b><span class="r-date">${esc(range(x.start, x.end, x.current))}</span></div>
       <div class="r-sub"><span data-ed="experience.${i}.company">${esc(x.company)}</span>${x.location ? ` · <span data-ed="experience.${i}.location">${esc(x.location)}</span>` : ''}</div>${rb.length ? `<ul>${rb.map(([t, r]) => `<li data-ed="b:${i}:${r}"${ai.has(t.toLowerCase()) ? ' class="ai-new" title="Added by AI. Check it is true, or edit it."' : ''}>${esc(t)}</li>`).join('')}</ul>` : ''}</div>`;
   }).join('')) : '',
-  education: s => s.education.length ? sec('Education', s.education.map((x, i) => `<div class="r-item"><div class="r-row"><b data-ed="education.${i}.degree">${esc(x.degree || 'Qualification')}</b><span class="r-date">${esc(range(x.start, x.end))}</span></div>
+  education: s => s.education.length ? sec('Education', s.education.map((x, i) => `<div class="r-item"><div class="r-row"><b data-ed="education.${i}.degree"${AIN(s).has(String(x.degree||'').toLowerCase()) ? ' class="ai-new" title="Added by AI. Check it is true, or edit it."' : ''}>${esc(x.degree || 'Qualification')}</b><span class="r-date">${esc(range(x.start, x.end))}</span></div>
       <div class="r-sub" data-ed="education.${i}.school">${esc(x.school)}</div>${x.details ? `<p data-ed="education.${i}.details">${esc(x.details)}</p>` : ''}</div>`).join('')) : '',
   skills: s => s.skills.length ? sec('Skills', `<div class="r-pills">${s.skills.map((k, i) => `<span data-ed="skills.${i}"${AIN(s).has(k.toLowerCase()) ? ' class="ai-new" title="Added by AI. Check it is true, or edit it."' : ''}>${esc(k)}</span>`).join('')}</div>`) : '',
-  projects: s => s.projects.length ? sec('Projects', s.projects.map((x, i) => `<div class="r-item"><div class="r-row"><b data-ed="projects.${i}.name">${esc(x.name || 'Project')}</b>${x.link ? `<span class="r-date"><a href="${esc(url(x.link))}">${esc(clean(x.link))}</a></span>` : ''}</div><p data-ed="projects.${i}.desc">${esc(x.desc)}</p></div>`).join('')) : '',
-  certifications: s => s.certifications.length ? sec('Certifications', s.certifications.map((x, i) => `<div class="r-item"><div class="r-row"><b data-ed="certifications.${i}.name">${esc(x.name)}</b><span class="r-date" data-ed="certifications.${i}.year">${esc(x.year)}</span></div><div class="r-sub" data-ed="certifications.${i}.issuer">${esc(x.issuer)}</div></div>`).join('')) : '',
+  projects: s => s.projects.length ? sec('Projects', s.projects.map((x, i) => `<div class="r-item"><div class="r-row"><b data-ed="projects.${i}.name"${AIN(s).has(String(x.name||'').toLowerCase()) ? ' class="ai-new" title="Added by AI. Check it is true, or edit it."' : ''}>${esc(x.name || 'Project')}</b>${x.link ? `<span class="r-date"><a href="${esc(url(x.link))}">${esc(clean(x.link))}</a></span>` : ''}</div><p data-ed="projects.${i}.desc">${esc(x.desc)}</p></div>`).join('')) : '',
+  certifications: s => s.certifications.length ? sec('Certifications', s.certifications.map((x, i) => `<div class="r-item"><div class="r-row"><b data-ed="certifications.${i}.name"${AIN(s).has(String(x.name||'').toLowerCase()) ? ' class="ai-new" title="Added by AI. Check it is true, or edit it."' : ''}>${esc(x.name)}</b><span class="r-date" data-ed="certifications.${i}.year">${esc(x.year)}</span></div><div class="r-sub" data-ed="certifications.${i}.issuer">${esc(x.issuer)}</div></div>`).join('')) : '',
   languages: s => s.languages.length ? sec('Languages', s.languages.map((x, i) => `<div class="r-row"><span data-ed="languages.${i}.name">${esc(x.name)}</span><span class="r-date" data-ed="languages.${i}.level">${esc(x.level)}</span></div>`).join('')) : ''
 };
 const visible = s => s.order.filter(k => !s.hidden.includes(k));
@@ -1284,6 +1305,8 @@ const A = {
   'start-ai': () => startVia('interview'),
   'start-import': () => startVia('import'),
   gallery: () => { galRender(); },
+  'legal-privacy': () => legal('Privacy', '<p>Folio stores your resume only in your own browser, on your device. We do not create accounts or sell data.</p><p>When you use an AI feature, the text you are working on is sent to an AI service to write the result, and is not kept by Folio. Do not paste anything you are not comfortable sharing.</p><p>You can erase everything at any time with More, then Start over, or by clearing your browser data.</p>'),
+  'legal-terms': () => legal('Terms of use', '<p>Folio is provided free and as is. You are responsible for checking that every line on your resume, LinkedIn text and cover letter is true before you share it.</p><p>Content you create is yours. The Folio name, design and code are &copy; 2026 Folio. All rights reserved. Fonts are Geist, used under the SIL Open Font License.</p><p>Folio is not affiliated with LinkedIn. LinkedIn is a trademark of LinkedIn Corporation. Folio does not guarantee interviews or job offers.</p>'),
   home: () => showHome(), 'home-top': () => { const el = $('#home'); if (el) el.scrollTop = 0; },
   'home-start': () => startVia('interview'),
   'home-examples': () => galRender(),
@@ -1411,6 +1434,7 @@ function enterApp() {
   requestAnimationFrame(() => { fit(); renderPreview(); });
 }
 window.addEventListener('resize', () => { const el = $('#home'); if (el && !el.hidden) scaleWraps(el); });
+function legal(t, body) { const U = window.FolioAI && window.FolioAI._ui; if (!U) return; const sh = U.open(`<div class="iv-top"><p class="eyebrow" style="margin:0">${t}</p><button class="icon-btn" data-ai="close" aria-label="Close">\u2715</button></div><h2>${t}</h2>${body}<div class="modal-actions"><button class="btn big" data-ai="close">Close</button></div>`); sh.onclick = e => { if (e.target.closest('[data-ai=close]')) U.close(); }; }
 function startVia(name) {
   const f = window.FolioAI && window.FolioAI.actions && window.FolioAI.actions[name];
   if (!f) { toast('Still loading. Please tap again in a moment, or choose "Build it step by step".'); return; }
@@ -1579,7 +1603,7 @@ const ROLES = [
   [/admin|secretary|assistant|office|clerk|data entry/i, ['Organised schedules, meetings and travel for managers', 'Prepared and filed documents, reports and correspondence', 'Maintained accurate records in spreadsheets and databases', 'Handled calls and emails and routed them to the right people'], ['Microsoft Office', 'Scheduling', 'Record keeping', 'Data entry', 'Organisation', 'Confidentiality']],
   [/account|finance|bookkeep|audit|payroll/i, ['Prepared and reconciled accounts, invoices and payments', 'Processed transactions accurately and on deadline', 'Supported month-end reporting and audits', 'Flagged discrepancies and helped resolve them'], ['Bookkeeping', 'Reconciliation', 'Microsoft Excel', 'Financial reporting', 'Attention to detail', 'Accounting software']],
   [/driver|logistics|warehouse|dispatch|delivery|supply/i, ['Delivered goods safely and on schedule', 'Checked loads, paperwork and vehicles before and after trips', 'Kept accurate delivery and stock records', 'Followed safety rules and company procedures'], ['Route planning', 'Inventory control', 'Health and safety', 'Time management', 'Record keeping', 'Reliability']],
-  [/nurse|health|care ?giver|clinic|pharmac|medical/i, ['Provided safe, compassionate care to patients', 'Recorded observations and treatments accurately', 'Followed infection-control and safety protocols', 'Communicated clearly with patients, families and colleagues'], ['Patient care', 'Infection control', 'Record keeping', 'Communication', 'Teamwork', 'Empathy']]
+  [/nurs|midwi|health|care ?giver|clinic|pharmac|medical/i, ['Provided safe, compassionate care to patients', 'Recorded observations and treatments accurately', 'Followed infection-control and safety protocols', 'Communicated clearly with patients, families and colleagues'], ['Patient care', 'Infection control', 'Record keeping', 'Communication', 'Teamwork', 'Empathy']]
 ];
 ROLES.push(
   [/hotel|hospitality|waiter|waitress|chef|cook|restaurant|bartender|barista|catering/i, ['Welcomed guests warmly and delivered fast, friendly service', 'Prepared and served food and drinks to a high standard', 'Kept work areas clean and followed food-hygiene rules', 'Handled orders, payments and special requests accurately'], ['Customer service', 'Food hygiene', 'Teamwork', 'Cash handling', 'Time management', 'Upselling']],
@@ -1591,6 +1615,31 @@ ROLES.push(
   [/manager|supervisor|team lead|coordinator|director|head of/i, ['Led and motivated a team to hit targets and deadlines', 'Planned work, assigned tasks and tracked progress', 'Coached staff and solved problems before they grew', 'Reported results and improvements to senior management'], ['Leadership', 'Planning', 'Coaching', 'Reporting', 'Decision making', 'Budgeting']]
 );
 const GENERIC = { bullets: ['Delivered consistent, high-quality work and met deadlines', 'Worked closely with colleagues and supervisors to reach team goals', 'Followed company procedures, safety rules and quality standards', 'Learned new tools and processes quickly and helped train others', 'Communicated clearly with customers, colleagues and managers'], skills: ['Teamwork', 'Communication', 'Time management', 'Problem solving', 'Attention to detail', 'Reliability', 'Microsoft Office', 'Adaptability', 'Organisation', 'Customer focus', 'Initiative', 'Planning'] };
+
+/* role knowledge: what a good CV for this job normally contains (education, certificates, a project) */
+(() => { const i = ROLES.findIndex(r => /nurs/.test(r[0].source)); if (i > 0) ROLES.unshift(ROLES.splice(i, 1)[0]); const j = ROLES.findIndex(r => /account\|finance/.test(r[0].source)); const k = ROLES.findIndex(r => /admin\|secretary/.test(r[0].source)); if (j > k && k >= 0) ROLES.splice(k, 0, ROLES.splice(j, 1)[0]); })();
+const PROFILES = [
+  [/nurs|midwi|health|care ?giver|clinic|pharmac|medical/i, { edu: ['B.Sc. Nursing Science', 'Diploma in Nursing'], certs: [['Basic Life Support (BLS)', 'American Heart Association'], ['Professional Nursing Licence', 'Nursing and Midwifery Council']] }],
+  [/develop|programmer|software|web|front.?end|back.?end|full.?stack|data scien|data analy|it\b|tech support/i, { edu: ['B.Sc. Computer Science', 'B.Eng. Software Engineering'], certs: [['AWS Certified Cloud Practitioner', 'Amazon Web Services'], ['Meta Front-End Developer Certificate', 'Coursera']], proj: ['Portfolio website', 'Designed and built a responsive personal site that showcases my projects, with clean code, fast loading and mobile-friendly pages.'] }],
+  [/design|graphic|ui|ux|creative|photograph|video|content|social media|writer|copy/i, { edu: ['B.A. Communication and Design', 'Diploma in Graphic Design'], certs: [['Google UX Design Certificate', 'Google'], ['Adobe Certified Professional', 'Adobe']], proj: ['Portfolio of selected work', 'A collection of design, content or campaign work showing my process and the results it produced for clients.'] }],
+  [/human resource|hr\b|recruit|talent|people ops/i, { edu: ['B.Sc. Human Resource Management', 'B.Sc. Business Administration'], certs: [['Associate Professional in Human Resources (aPHR)', 'HRCI'], ['Recruitment and Selection Certificate', 'CIPM']] }],
+  [/account|finance|bookkeep|audit|payroll|tax/i, { edu: ['B.Sc. Accounting', 'B.Sc. Finance'], certs: [['Associate Chartered Accountant (ACA)', 'ICAN'], ['QuickBooks Certified User', 'Intuit']] }],
+  [/bank|teller|loan|credit|insurance|relationship officer/i, { edu: ['B.Sc. Banking and Finance', 'B.Sc. Economics'], certs: [['Certified Customer Service Professional', 'Institute of Customer Service'], ['Anti-Money Laundering Awareness Certificate', 'ICAN']] }],
+  [/quality|qa\b|qc\b|food safety|haccp|inspector|laborator/i, { edu: ['B.Sc. Biochemistry', 'B.Sc. Food Science and Technology'], certs: [['HACCP Certificate', 'Food Safety Institute'], ['ISO 9001 Internal Auditor', 'Bureau Veritas']] }],
+  [/teacher|tutor|lecturer|instructor|education/i, { edu: ['B.Ed. Education', 'PGDE Postgraduate Diploma in Education'], certs: [['Teachers Registration Certificate', 'Teachers Registration Council'], ['TEFL Certificate', 'TEFL Org']] }],
+  [/hotel|hospitality|waiter|waitress|chef|cook|restaurant|bartender|barista|catering/i, { edu: ['Diploma in Hospitality Management', 'Certificate in Culinary Arts'], certs: [['Food Handler Certificate', 'Food Safety Council'], ['First Aid Certificate', 'Red Cross']] }],
+  [/security|guard|safety officer|surveill/i, { edu: ['National Diploma in Security Studies', 'Senior Secondary School Certificate'], certs: [['First Aid and CPR Certificate', 'Red Cross'], ['Fire Safety Certificate', 'Fire Service Training']] }],
+  [/driver|logistics|warehouse|dispatch|delivery|supply|procure/i, { edu: ['B.Sc. Logistics and Supply Chain Management', 'National Diploma in Business Studies'], certs: [['Defensive Driving Certificate', 'Federal Road Safety Corps'], ['Warehouse Safety Certificate', 'NEBOSH']] }],
+  [/electric|mechanic|technician|plumb|welder|fitter|carpent|construction|mason|artisan|maintenance|operator/i, { edu: ['National Diploma in Engineering Technology', 'Trade Certificate in Technical Skills'], certs: [['Health and Safety Certificate', 'NEBOSH'], ['Trade Test Certificate', 'Industrial Training Fund']] }],
+  [/customer (service|support|care)|call cent|help ?desk|receptionist|front desk/i, { edu: ['B.A. Communication', 'OND Business Administration'], certs: [['Customer Service Excellence Certificate', 'Coursera'], ['Microsoft Office Specialist', 'Microsoft']] }],
+  [/admin|secretary|assistant|office|clerk|data entry/i, { edu: ['OND Office Technology and Management', 'B.Sc. Business Administration'], certs: [['Microsoft Office Specialist', 'Microsoft'], ['Executive Assistant Certificate', 'Coursera']] }],
+  [/sales|business development|marketing|retail|cashier/i, { edu: ['B.Sc. Marketing', 'B.Sc. Business Administration'], certs: [['Digital Marketing Fundamentals', 'Google'], ['HubSpot Sales Certificate', 'HubSpot Academy']] }],
+  [/manager|supervisor|team lead|coordinator|director|head of|project/i, { edu: ['B.Sc. Business Administration', 'MBA'], certs: [['Project Management Professional (PMP)', 'PMI'], ['Leadership and Management Certificate', 'CMI']] }]
+];
+const GEN_PROFILE = { edu: [], certs: [['Microsoft Office Specialist', 'Microsoft'], ['Professional Skills Certificate', 'Coursera']] };
+const SUMS = {"nurs": "Compassionate and dependable, giving safe, patient-centred care and keeping clear, accurate records. Calm in busy wards and emergencies, and a good communicator with patients, families and doctors.", "develop": "Practical problem solver who builds clean, reliable, user-friendly software. Comfortable working with designers and product owners, writing tested code and learning new tools quickly.", "design": "Creative and detail-focused, turning ideas into clear, eye-catching work that fits the brief and the audience. Comfortable taking feedback and delivering on deadline.", "human": "People-focused professional who supports hiring, onboarding and staff welfare with fairness and confidentiality. Organised, discreet and good at keeping records accurate.", "account": "Accurate, organised and deadline-driven, with a strong eye for detail in bookkeeping, reconciliation and reporting. Trusted to handle figures and confidential information with care.", "bank": "Customer-focused and careful with money, handling transactions accurately and explaining products clearly. Understands compliance and builds trust with every customer.", "quality": "Detail-driven quality professional who keeps products safe and processes compliant. Skilled at inspections, documentation and finding the root cause of problems.", "teacher": "Patient and encouraging, planning clear lessons that help every learner progress. Strong at classroom management, assessment and working with parents.", "hotel": "Warm, fast and guest-focused, delivering service that makes people want to come back. Works well in a busy team and keeps standards of hygiene and presentation high.", "security": "Alert, disciplined and reliable, protecting people and property and reporting clearly. Calm under pressure and trained to follow procedures.", "driver": "Safe, punctual and organised, getting people and goods where they need to be on time. Keeps accurate records and looks after vehicles and loads.", "electric": "Hands-on technical professional who installs, repairs and maintains equipment safely. Reads technical drawings, solves faults quickly and follows safety standards.", "customer": "Friendly, patient and clear, solving customer problems quickly and leaving people satisfied. Keeps accurate notes and stays calm with difficult requests.", "admin": "Organised and dependable, keeping offices running smoothly through accurate records, good scheduling and clear communication. Handles confidential information with care.", "sales": "Energetic and relationship-driven, finding customer needs and closing sales to meet targets. Confident negotiator who follows up and keeps good records.", "manager": "Results-focused leader who sets clear goals, supports the team and keeps work on schedule. Good at planning, communication and solving problems under pressure."};
+function sumFor(title) { const p = PROFILES.find(p => p[0].test(String(title || ''))); if (!p) return ''; const k = Object.keys(SUMS)[PROFILES.indexOf(p)]; return SUMS[k] || ''; }
+function profileFor(title) { const t = String(title || ''); const hit = PROFILES.find(p => p[0].test(t)); return hit ? hit[1] : GEN_PROFILE; }
 function roleBoost(title, extra) {
   const hit = ROLES.find(r => r[0].test(String(title || '') + ' ' + String(extra || '')));
   return hit ? { bullets: hit[1], skills: hit[2] } : { bullets: GENERIC.bullets, skills: GENERIC.skills };
@@ -1755,7 +1804,7 @@ function enrich(data) {
   data.experience = (Array.isArray(data.experience) ? data.experience : []).filter(x => x && (x.role || x.company));
   if (!data.experience.length && title) data.experience = [{ role: title, company: '', start: '', end: '', current: false, bullets: [], suggested: [] }];
   data.experience.forEach(e => {
-    const mine = lineList(e.bullets), boost = roleBoost(e.role || title, '').bullets;
+    const mine = lineList(e.bullets), boost = roleBoost(e.role || title, '').bullets.concat(GENERIC.bullets);
     const have = new Set(mine.map(x => x.toLowerCase())), words = t => t.split(/\s+/).length;
     let sug = lineList(e.suggested).filter(x => words(x) >= 4 && !have.has(x.toLowerCase()));
     boost.forEach(b => { if (!have.has(b.toLowerCase()) && !sug.some(x => x.toLowerCase() === b.toLowerCase())) sug.push(b); });
@@ -1767,12 +1816,20 @@ function enrich(data) {
   const need = Math.max(0, 12 - have.size), out = [];
   pool.forEach(k => { const l = k.toLowerCase(); if (out.length < need && !have.has(l) && !out.some(x => x.toLowerCase() === l)) out.push(k); });
   data.suggestedSkills = out;
-  if (str(data.summary).split(/\s+/).length < 22) data.summary = localSummary({ title, skills: (data.skills || []).join(', '), jobs: data.experience });
+  if (str(data.summary).split(/\s+/).length < 22) {
+    const lead = sumFor(title || (data.experience[0] || {}).role), j0 = data.experience[0] || {}, co = str(j0.company).replace(/[.\s]+$/, '');
+    data.summary = lead ? `${CAP(title || j0.role)}${co ? ' at ' + co : ''}. ${lead}` : localSummary({ title, skills: (data.skills || []).join(', '), jobs: data.experience });
+  }
+  const prof = profileFor(title || (data.experience[0] || {}).role);
+  data.suggestedEdu = (data.education || []).length ? [] : prof.edu.slice(0, 1);
+  data.suggestedCerts = (data.certifications || []).length ? [] : prof.certs.slice(0, 2);
+  data.suggestedProj = prof.proj && !(data.projects || []).length ? [prof.proj] : [];
   const todo = [], P = data.personal;
   if (!str(P.email) || !str(P.phone)) todo.push('Add your email and phone number so employers can reach you.');
   if (!(data.experience[0] && str(data.experience[0].company))) todo.push('Add the company name and dates for your job.');
   else if (data.experience.length < 2) todo.push('Add an earlier job or internship if you have one.');
-  if (!(data.education || []).length) todo.push('Add where you studied (school, course, year).');
+  if (!(data.education || []).length || data.suggestedEdu.length) todo.push('Add the name of your school and the year you finished. Change the course if ours is not yours.');
+  if (data.suggestedCerts.length) todo.push('Keep only the certificates you really hold, and add the year.');
   data.tips = todo.concat(Array.isArray(data.tips) ? data.tips : []);
   return data;
 }
@@ -1784,13 +1841,18 @@ function apply(data, label) {
   /* everything is added straight away (so the CV is never thin) and marked yellow; the review lets the user untick what is not true */
   jobs.forEach((e, i) => { e.bullets = lineList(e.bullets).concat(sugB[i]); });
   data.skills = (Array.isArray(data.skills) ? data.skills : []).concat(sugS);
+  const sugE = data.suggestedEdu || [], sugC = data.suggestedCerts || [], sugP = data.suggestedProj || [];
+  data.education = (Array.isArray(data.education) ? data.education : []).concat(sugE.map(d => ({ degree: d, school: '', start: '', end: '', details: '' })));
+  data.certifications = (Array.isArray(data.certifications) ? data.certifications : []).concat(sugC.map(c => ({ name: c[0], issuer: c[1], year: '' })));
+  data.projects = (Array.isArray(data.projects) ? data.projects : []).concat(sugP.map(p => ({ name: p[0], link: '', desc: p[1] })));
   const next = normalize(data, F().state);
   F().replace(next);
-  F().patch(s => { s.aiAdded = (s.aiAdded || []).concat(sugB.flat(), sugS).map(x => String(x).trim()); });
+  F().patch(s => { s.aiAdded = (s.aiAdded || []).concat(sugB.flat(), sugS, sugE, sugC.map(c => c[0]), sugP.map(p => p[0])).map(x => String(x).trim()); });
   const tips = (data.tips || []).map(str).filter(Boolean).slice(0, 4);
   const norm = t => str(t).toLowerCase().replace(/[.\s]+$/, '');
   const review = `<div class="boost"><b>\u2728 We filled in the gaps</b><p class="hint">These lines are typical for your kind of work. They are already on your CV, highlighted yellow. <b>Untick anything that is not true for you</b> and it is removed.</p>
     ${sugB.map((bl, i) => bl.length ? `<div class="bgroup"><span class="lbl">${esc(jobs[i].role || 'Job')}${jobs[i].company ? ' \u00b7 ' + esc(jobs[i].company) : ''}</span>${bl.map((x, j) => `<label class="tick"><input type="checkbox" data-sb="${i}:${j}" checked><span>${esc(x)}</span></label>`).join('')}</div>` : '').join('')}
+    ${(sugE.length || sugC.length || sugP.length) ? `<div class="bgroup"><span class="lbl">Education, certificates and projects people in this job usually list</span>${sugE.map((x, j) => `<label class="tick"><input type="checkbox" data-se="${j}" checked><span><b>Education:</b> ${esc(x)}</span></label>`).join('')}${sugC.map((x, j) => `<label class="tick"><input type="checkbox" data-sc="${j}" checked><span><b>Certificate:</b> ${esc(x[0])}</span></label>`).join('')}${sugP.map((x, j) => `<label class="tick"><input type="checkbox" data-sp="${j}" checked><span><b>Project:</b> ${esc(x[0])}</span></label>`).join('')}</div>` : ''}
     ${sugS.length ? `<div class="bgroup"><span class="lbl">Skills recruiters search for</span><div class="tickrow">${sugS.map((x, j) => `<label class="tick pill"><input type="checkbox" data-ss="${j}" checked><span>${esc(x)}</span></label>`).join('')}</div></div>` : ''}</div>`;
   open(`<p class="eyebrow">${esc(label)}</p><h2>Your CV is ready \ud83c\udf89</h2>
     <p class="lead">It is full and ready. Check the highlighted extras, then take a look. You can edit every line.</p>
@@ -1803,6 +1865,11 @@ function apply(data, label) {
     if (a === 'see' || a === 'edit' || a === 'linkedin') {
       const dropB = sugB.map((bl, i) => bl.filter((_, j) => { const c = sh.querySelector(`[data-sb="${i}:${j}"]`); return c && !c.checked; }).map(norm));
       const dropS = sugS.filter((_, j) => { const c = sh.querySelector(`[data-ss="${j}"]`); return c && !c.checked; }).map(norm);
+      const dropE = sugE.filter((_, j) => { const c = sh.querySelector(`[data-se="${j}"]`); return c && !c.checked; }).map(norm), dropC = sugC.filter((_, j) => { const c = sh.querySelector(`[data-sc="${j}"]`); return c && !c.checked; }).map(x => norm(x[0])), dropP = sugP.filter((_, j) => { const c = sh.querySelector(`[data-sp="${j}"]`); return c && !c.checked; }).map(x => norm(x[0]));
+      if (dropE.length || dropC.length || dropP.length) F().patch(s => {
+        s.education = s.education.filter(x => !dropE.includes(norm(x.degree)) || str(x.school)); s.certifications = s.certifications.filter(x => !dropC.includes(norm(x.name))); s.projects = s.projects.filter(x => !dropP.includes(norm(x.name)));
+        const gone = new Set(dropE.concat(dropC, dropP)); s.aiAdded = (s.aiAdded || []).filter(x => !gone.has(norm(x)));
+      });
       if (dropB.flat().length || dropS.length) F().patch(s => {
         dropB.forEach((bl, i) => { if (bl.length && s.experience[i]) s.experience[i].bullets = String(s.experience[i].bullets || '').split('\n').filter(l => !bl.includes(norm(l))).join('\n'); });
         s.skills = s.skills.filter(k => !dropS.includes(norm(k)));

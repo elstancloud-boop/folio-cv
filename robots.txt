@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://folio-cv-s9v8.onrender.com/sitemap.xml
